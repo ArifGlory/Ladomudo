@@ -102,42 +102,6 @@ class PegawaiController extends Controller
         return view('back.pegawai.create');
     }
 
-    public function createMulti()
-    {
-        //
-        return view('back.pegawai.create_multi');
-    }
-
-    public function storeMulti(ImportRequest $request){
-        $nama_file = "";
-        if ($request->hasFile('file_excel')) {
-            $file = $request->file('file_excel');
-            $nama_file = round(microtime(true) * 1000) . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('/excel/'), $nama_file);
-        }
-
-        //$save =  Excel::import(new SantriDataImport(), public_path('/excel/'.$nama_file) );
-        $import = new SantriDataImport();
-        $import->import(public_path('/excel/'.$nama_file));
-
-
-        if ($import) {
-            return redirect(route('santri.index'))
-                ->with('pesan_status',[
-                    'tipe' => 'info',
-                    'desc' => 'Berhasil import data Santri',
-                    'judul' => 'Data Santri'
-                ]);
-        } else {
-            Redirect::back()->with('pesan_status', [
-                'tipe' => 'danger',
-                'desc' => 'Server Error',
-                'judul' => 'Terdapat kesalahan pada server.'
-            ]);
-        }
-
-    }
-
     public function store(Pegawai2Request $request)
     {
         //

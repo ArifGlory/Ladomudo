@@ -42,25 +42,16 @@ Route::group([
 });
 Route::resource('pegawai', 'Back\PegawaiController')->middleware('auth');
 
-Route::get('/jadwal', 'Back\JadwalController@index')->middleware('auth')->name('jadwal');
+Route::get('/kategori', 'Back\KategoriController@index')->middleware('auth')->name('kategori');
 Route::group([
-    'prefix' => 'jadwal',
+    'prefix' => 'kategori',
     'middleware' => 'auth'
 ], function () {
-    Route::get('tukar-jadwal', [\App\Http\Controllers\Back\JadwalController::class, 'listTukarJadwal'])->name('jadwal.tukar-jadwal');
-    Route::get('data', [\App\Http\Controllers\Back\JadwalController::class, 'data'])->name('jadwal.data');
-    Route::get('data-cari-jadwal', [\App\Http\Controllers\Back\JadwalController::class, 'dataCariJadwal'])->name('jadwal.data-cari-jadwal');
-    Route::get('data-tukar-jadwal', [\App\Http\Controllers\Back\JadwalController::class, 'dataTukarJadwal'])->name('jadwal.data-tukar-jadwal');
-    Route::get('tukar/{id}', [\App\Http\Controllers\Back\JadwalController::class, 'ajukanTukar'])->name('jadwal.tukar');
-    Route::get('show-tukar-jadwal/{id}', [\App\Http\Controllers\Back\JadwalController::class, 'showTukarJadwal'])->name('jadwal.show-tukar-jadwal');
-    Route::put('update-tukar-jadwal', [\App\Http\Controllers\Back\JadwalController::class, 'updateTukarJadwal'])->name('jadwal.update-tukar-jadwal');
-    /* Route::get('create-multi', [\App\Http\Controllers\Back\JadwalController::class, 'createMulti'])->name('jadwal.create-multi');
-     Route::post('store-multi', [\App\Http\Controllers\Back\JadwalController::class, 'storeMulti'])->name('jadwal.store-multi');*/
-    Route::get('trash', [\App\Http\Controllers\Back\JadwalController::class, 'trash'])->name('jadwal.trash');
-    Route::post('restore/{jadwal}', [\App\Http\Controllers\Back\JadwalController::class, 'restore'])->name('jadwal.restore');
-    Route::post('store-penukaran', [\App\Http\Controllers\Back\JadwalController::class, 'storePenukaran'])->name('jadwal.store-penukaran');
+    Route::get('data', [\App\Http\Controllers\Back\KategoriController::class, 'data'])->name('kategori.data');
+    Route::get('trash', [\App\Http\Controllers\Back\KategoriController::class, 'trash'])->name('kategori.trash');
+    Route::post('restore/{kategori}', [\App\Http\Controllers\Back\KategoriController::class, 'restore'])->name('kategori.restore');
 });
-Route::resource('jadwal', 'Back\JadwalController')->middleware('auth');
+Route::resource('kategori', 'Back\KategoriController')->middleware('auth');
 
 
 

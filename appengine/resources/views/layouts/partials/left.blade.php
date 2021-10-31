@@ -7,10 +7,10 @@
     </li>
     @if(Auth::user()->jenis_user == "admin")
         <li class="nav-title text-black-50">Data Master</li>
-        <li class="{{ Nav::isRoute('pegawai', 'active') }}">
-            <a href="{{ url('/pegawai') }}" title="Pegawai" data-filter-tags="pegawai">
+        <li class="{{ Nav::isRoute('kategori', 'active') }}">
+            <a href="{{ url('/kategori') }}" title="Pegawai" data-filter-tags="kategori">
                 <i class="fal fa-list text-white"></i>
-                <span class="nav-link-text text-white" data-i18n="nav.pegawai">Kategori</span>
+                <span class="nav-link-text text-white" data-i18n="nav.kategori">Kategori</span>
             </a>
         </li>
         <li class="{{ Nav::isRoute('pegawai', 'active') }}">
