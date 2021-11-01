@@ -13,10 +13,10 @@
                 <span class="nav-link-text text-white" data-i18n="nav.kategori">Kategori</span>
             </a>
         </li>
-        <li class="{{ Nav::isRoute('pegawai', 'active') }}">
-            <a href="{{ url('/pegawai') }}" title="Produk" data-filter-tags="pegawai">
+        <li class="{{ Nav::isRoute('produk', 'active') }}">
+            <a href="{{ url('/produk') }}" title="Produk" data-filter-tags="produk">
                 <i class="fal fa-shopping-cart text-white"></i>
-                <span class="nav-link-text text-white" data-i18n="nav.pegawai">Produk</span>
+                <span class="nav-link-text text-white" data-i18n="nav.produk">Produk</span>
             </a>
         </li>
         <li class="{{ Nav::isRoute('supplier', 'active') }}">

@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Back;
 
 use App\Http\Requests\ImportRequest;
 use App\Http\Requests\KategoriRequest;
+use App\Http\Requests\ProdukRequest;
 use App\Http\Requests\SupplierRequest;
 use App\Imports\SantriDataImport;
 // use App\Models\PangkatGolongan;
 use App\Models\Kategori;
+use App\Models\Produk;
 use App\Models\Supplier;
 use App\User;
 use Illuminate\Http\Request;
@@ -20,7 +22,7 @@ use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
-class SupplierController extends Controller
+class ProdukController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -29,7 +31,7 @@ class SupplierController extends Controller
      */
     public function index(Request $request)
     {
-        return view('back.supplier.index');
+        return view('back.produk.index');
     }
 
     /*
@@ -39,8 +41,9 @@ class SupplierController extends Controller
     public function data(Request $request)
     {
                 $role = Auth::user()->jenis_user;
-                $data = Supplier::select('*')
-                    ->orderBy('id_supplier', 'DESC')
+                $data = Produk::select('*')
+                    ->join('supplier','supplier.id_supplier','=','produk.id_supplier')
+                    ->orderBy('id_produk', 'DESC')
                     ->get();
 
                 return Datatables::of($data)
@@ -53,11 +56,11 @@ class SupplierController extends Controller
                          * R = Restore = $restore
                          * M = Modal Dialog*/
                         $role = Auth::user()->jenis_user;
-                        //$lihat = route('supplier.show', $item->id_supplier);
-                        $edit = route('supplier.edit', $item->id_supplier);
-                        $hapus = route('supplier.destroy', $item->id_supplier);
-                        $button = 'EHRM';
-                        return view('datatable._action_button', compact('item', 'button','edit', 'hapus'));
+                        $lihat = route('produk.show', $item->id_produk);
+                        $edit = route('produk.edit', $item->id_produk);
+                        $hapus = route('produk.destroy', $item->id_produk);
+                        $button = 'LEHRM';
+                        return view('datatable._action_button', compact('item', 'button','lihat','edit', 'hapus'));
 
                     })
                     ->escapeColumns([])
@@ -70,26 +73,40 @@ class SupplierController extends Controller
     {
         //
 
-        return view('back.supplier.create');
+        $supplier = Supplier::all();
+        $kategori = Kategori::all();
+
+        return view('back.produk.create',compact('supplier','kategori'));
     }
 
-    public function store(SupplierRequest $request)
+    public function store(ProdukRequest $request)
     {
         //
         $request->validated();
         $role = Auth::user()->jenis_user;
 
-        $save = Supplier::create([
-            'nama_supplier' => $request->input('nama_supplier'),
-            'alamat_supplier' => $request->input('alamat_supplier'),
-            'phone_supplier' => $request->input('phone_supplier')
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $photo = round(microtime(true) * 1000) . '.' . $image->getClientOriginalExtension();
+            $image->move('img/produk/', $photo);
+        }
+
+        $save = Produk::create([
+            'id_supplier' => $request->input('id_supplier'),
+            'id_kategori' => $request->input('id_kategori'),
+            'nama_produk' => $request->input('nama_produk'),
+            'harga' => $request->input('harga'),
+            'stok' => $request->input('stok'),
+            'deskripsi_produk' => $request->input('deskripsi_produk'),
+            'cara_penyimpanan' => $request->input('cara_penyimpanan'),
+            'foto_produk' => $photo
         ]);
         if ($save) {
-            return redirect(route('supplier.index'))
+            return redirect(route('produk.index'))
                 ->with('pesan_status',[
                     'tipe' => 'info',
-                    'desc' => 'Berhasil menambahkan supplier',
-                    'judul' => 'Data supplier'
+                    'desc' => 'Berhasil menambahkan produk',
+                    'judul' => 'Data produk'
                 ]);
         } else {
             Redirect::back()->with('pesan_status', [

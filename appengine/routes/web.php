@@ -64,6 +64,17 @@ Route::group([
 });
 Route::resource('supplier', 'Back\SupplierController')->middleware('auth');
 
+Route::get('/produk', 'Back\ProdukController@index')->middleware('auth')->name('produk');
+Route::group([
+    'prefix' => 'produk',
+    'middleware' => 'auth'
+], function () {
+    Route::get('data', [\App\Http\Controllers\Back\ProdukController::class, 'data'])->name('produk.data');
+    Route::get('trash', [\App\Http\Controllers\Back\ProdukController::class, 'trash'])->name('produk.trash');
+    Route::post('restore/{produk}', [\App\Http\Controllers\Back\ProdukController::class, 'restore'])->name('produk.restore');
+});
+Route::resource('produk', 'Back\ProdukController')->middleware('auth');
+
 
 
 
