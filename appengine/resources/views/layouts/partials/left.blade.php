@@ -2,27 +2,27 @@
     <li class="{{ Nav::isRoute('dashboard', 'active') }}">
         <a href="{{ route('dashboard') }}" title="Dashboard" data-filter-tags="dashboard">
                 <i class="fal fa-cube text-white"></i>
-                <span class="nav-link-text" data-i18n="nav.dashboard">Dashboard</span>
+                <span class="nav-link-text text-white" data-i18n="nav.dashboard">Dashboard</span>
         </a>
     </li>
     @if(Auth::user()->jenis_user == "admin")
         <li class="nav-title text-black-50">Data Master</li>
         <li class="{{ Nav::isRoute('kategori', 'active') }}">
-            <a href="{{ url('/kategori') }}" title="Pegawai" data-filter-tags="kategori">
+            <a href="{{ url('/kategori') }}" title="Kategori" data-filter-tags="kategori">
                 <i class="fal fa-list text-white"></i>
                 <span class="nav-link-text text-white" data-i18n="nav.kategori">Kategori</span>
             </a>
         </li>
         <li class="{{ Nav::isRoute('pegawai', 'active') }}">
-            <a href="{{ url('/pegawai') }}" title="Pegawai" data-filter-tags="pegawai">
+            <a href="{{ url('/pegawai') }}" title="Produk" data-filter-tags="pegawai">
                 <i class="fal fa-shopping-cart text-white"></i>
                 <span class="nav-link-text text-white" data-i18n="nav.pegawai">Produk</span>
             </a>
         </li>
-        <li class="{{ Nav::isRoute('jadwal', 'active') }}">
-            <a href="{{ url('/jadwal') }}" title="Jadwal Dinas" data-filter-tags="Jadwal Dinas">
+        <li class="{{ Nav::isRoute('supplier', 'active') }}">
+            <a href="{{ url('/supplier') }}" title="Supplier" data-filter-tags="Jadwal Dinas">
                 <i class="fal fa-truck text-white"></i>
-                <span class="nav-link-text text-white" data-i18n="nav.jadwal">Supplier</span>
+                <span class="nav-link-text text-white" data-i18n="nav.supplier">Supplier</span>
             </a>
         </li>
     @endif

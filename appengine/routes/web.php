@@ -53,6 +53,17 @@ Route::group([
 });
 Route::resource('kategori', 'Back\KategoriController')->middleware('auth');
 
+Route::get('/supplier', 'Back\SupplierController@index')->middleware('auth')->name('supplier');
+Route::group([
+    'prefix' => 'supplier',
+    'middleware' => 'auth'
+], function () {
+    Route::get('data', [\App\Http\Controllers\Back\SupplierController::class, 'data'])->name('supplier.data');
+    Route::get('trash', [\App\Http\Controllers\Back\SupplierController::class, 'trash'])->name('supplier.trash');
+    Route::post('restore/{supplier}', [\App\Http\Controllers\Back\SupplierController::class, 'restore'])->name('supplier.restore');
+});
+Route::resource('supplier', 'Back\SupplierController')->middleware('auth');
+
 
 
 
