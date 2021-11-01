@@ -51,7 +51,6 @@ class ProdukController extends Controller
                     ->addColumn('harga', function ($item) {
 
                         $harga =  "Rp. ".number_format($item->harga,0,',','.');
-
                         return $harga;
 
                     })
@@ -155,7 +154,7 @@ class ProdukController extends Controller
         $data = Produk::select('*')
             ->join('supplier','supplier.id_supplier','=','produk.id_supplier')
             ->join('kategori','kategori.id_kategori','=','produk.id_kategori')
-            ->where('id_produk',$id)
+            ->where('produk.id_produk',$id)
             ->first();
 
         return view('back.produk.show', compact('data'));
@@ -163,11 +162,13 @@ class ProdukController extends Controller
 
 
     public function edit($id){
-        $data = Supplier::select('*')
-            ->where('id_supplier',$id)
+        $data = Produk::select('*')
+            ->join('supplier','supplier.id_supplier','=','produk.id_supplier')
+            ->join('kategori','kategori.id_kategori','=','produk.id_kategori')
+            ->where('produk.id_produk',$id)
             ->first();
 
-        return view('back.supplier.edit', compact('data'));
+        return view('back.produk.edit', compact('data'));
     }
 
     public function destroy($id)
