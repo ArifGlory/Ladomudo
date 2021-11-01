@@ -130,15 +130,15 @@ class ProdukController extends Controller
 
         $requestData = $request->all();
 
-        $data = Supplier::findOrFail($id);
+        $data = Produk::findOrFail($id);
         $update = $data->update($requestData);
 
         if ($update) {
-            return redirect(route('supplier.index'))
+            return redirect(route('produk.index'))
                 ->with('pesan_status', [
                     'tipe' => 'info',
                     'desc' => 'Data Berhasil diupdate',
-                    'judul' => 'Data Supplier'
+                    'judul' => 'Data produk'
                 ]);
         } else {
             Redirect::back()->with('pesan_status', [
@@ -167,15 +167,17 @@ class ProdukController extends Controller
             ->join('kategori','kategori.id_kategori','=','produk.id_kategori')
             ->where('produk.id_produk',$id)
             ->first();
+        $supplier = Supplier::all();
+        $kategori = Kategori::all();
 
-        return view('back.produk.edit', compact('data'));
+        return view('back.produk.edit', compact('data','kategori','supplier'));
     }
 
     public function destroy($id)
     {
         //
 
-        $info = Supplier::withTrashed()->find($id);
+        $info = Produk::withTrashed()->find($id);
         if ($info->trashed()) {
             $delete = $info->forceDelete();
         } else {

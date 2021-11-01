@@ -43,6 +43,7 @@
                             <label class="col-12 col-md-4 col-form-label">Kategori Produk</label>
                             <div class="col-sm-12 col-md-8">
                                 <select class="form-control select2" name="id_kategori" id="id_kategori" required>
+                                    <option value="{{$data->id_kategori}}">Terpilih -  {{$data->nama_kategori}} </option>
                                     @foreach($kategori as $val)
                                         <option value="{{$val->id_kategori}}"> {{$val->nama_kategori}} </option>
                                     @endforeach
@@ -60,6 +61,7 @@
                             <label class="col-12 col-md-4 col-form-label">Supplier Produk Ini</label>
                             <div class="col-sm-12 col-md-8">
                                 <select class="form-control select2" name="id_supplier" id="id_supplier" required>
+                                    <option value="{{$data->id_supplier}}"> Terpilih -  {{$data->nama_supplier}} </option>
                                     @foreach($supplier as $val)
                                         <option value="{{$val->id_supplier}}"> {{$val->nama_supplier}} </option>
                                     @endforeach
