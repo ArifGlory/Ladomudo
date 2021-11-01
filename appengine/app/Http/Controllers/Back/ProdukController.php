@@ -43,10 +43,18 @@ class ProdukController extends Controller
                 $role = Auth::user()->jenis_user;
                 $data = Produk::select('*')
                     ->join('supplier','supplier.id_supplier','=','produk.id_supplier')
+                    ->join('kategori','kategori.id_kategori','=','produk.id_kategori')
                     ->orderBy('id_produk', 'DESC')
                     ->get();
 
                 return Datatables::of($data)
+                    ->addColumn('harga', function ($item) {
+
+                        $harga =  "Rp. ".number_format($item->harga,0,',','.');
+
+                        return $harga;
+
+                    })
                     ->addColumn('_action', function ($item) {/*
                          /*
                          * L = Lihat => $lihat
@@ -144,11 +152,13 @@ class ProdukController extends Controller
     }
 
     public function show($id){
-        $data = Supplier::select('*')
-            ->where('id_supplier',$id)
+        $data = Produk::select('*')
+            ->join('supplier','supplier.id_supplier','=','produk.id_supplier')
+            ->join('kategori','kategori.id_kategori','=','produk.id_kategori')
+            ->where('id_produk',$id)
             ->first();
 
-        return view('back.supplier.show', compact('data'));
+        return view('back.produk.show', compact('data'));
     }
 
 

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Detail Data Kategori')
+@section('title', 'Detail Data Produk')
 
 @push('css')
     <link rel="stylesheet" media="screen, print" href="{{ asset('back-end/css/formplugins/select2/select2.bundle.css') }}">
@@ -12,19 +12,19 @@
 @section('breadcrumb')
     <ol class="breadcrumb santri-breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><strong>{{  getSettingData('web_name')->value ?? env('APP_NAME') }}</strong> WebApp</a></li>
-        <li class="breadcrumb-item"><a href="{{ route('kategori.index') }}">Kategori</a></li>
-        <li class="breadcrumb-item active">Detail Kategori</li>
+        <li class="breadcrumb-item"><a href="{{ route('produk.index') }}">Produk</a></li>
+        <li class="breadcrumb-item active">Detail Produk</li>
         <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
     </ol>
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-newspaper'></i> Detail kategori
+            <i class='subheader-icon fal fa-newspaper'></i> Detail produk
             <small>
-                Detail Kategori ini.
+                Detail Produk ini.
             </small>
         </h1>
         <div class="btn-group btn-group-sm text-center float-right" role="group">
-            <a href="{{ url('/kategori') }}" class="btn btn-primary btn-mini waves-effect waves-light"><span class="fal fa-backward"></span> Kembali</a>
+            <a href="{{ url('/produk') }}" class="btn btn-primary btn-mini waves-effect waves-light"><span class="fal fa-backward"></span> Kembali</a>
         </div>
     </div>
 @endsection
@@ -35,7 +35,7 @@
             <div class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        <strong id="title-table">Detail</strong> <span class="fw-300"><i>Kategori</i></span>
+                        <strong id="title-table">Detail</strong> <span class="fw-300"><i>Produk</i></span>
                     </h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -48,12 +48,65 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group mt-3">
-                                    <label class="form-label">Nama Kategori</label>
-                                    <h5>{{$data->nama_kategori}}</h5>
+                                    <label class="form-label">Nama Produk</label>
+                                    <h5>{{$data->nama_produk}}</h5>
                                 </div>
                                 <div class="form-group mt-3">
                                     <label class="form-label">Deskripsi</label>
-                                    <h5>{{$data->deskripsi_kategori}}</h5>
+                                    <h5>{{$data->deskripsi_produk}}</h5>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label class="form-label">Cara Penyimpanan</label>
+                                    <h5>{{$data->cara_penyimpanan}}</h5>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label class="form-label">Kategori</label>
+                                    <h5>{{$data->nama_kategori}}</h5>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label class="form-label">Supplier</label>
+                                    <h5>{{$data->nama_supplier}}</h5>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label class="form-label">Harga</label>
+                                    <h5><h5>Rp. {{ number_format($data->harga,0,',','.')}}</h5></h5>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label class="form-label">Stok</label>
+                                    <h5>{{$data->stok}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+            <div class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        <strong id="title-table">Detail</strong> <span class="fw-300"><i>Produk</i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                        <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                    </div>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group mt-3">
+                                    <label class="form-label">Foto Produk</label>
+                                    <div class="align-content-center text-center" style="margin-left: 30px;margin-right: 30px;">
+                                        @if($data->foto_produk)
+                                            <img id="previewFoto" class="img-fluid" src="{{ asset('img/produk/'.$data->foto_produk) }}" height="250px" alt="">
+                                        @else
+                                            <img id="previewFoto" width="100%" height="250" src="{{asset('img/pegawai/padrao.png')}}">
+                                        @endif
+                                    </div>
                                 </div>
                             </div>
                         </div>
