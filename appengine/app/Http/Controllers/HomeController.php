@@ -16,8 +16,10 @@ use App\Models\OrangTua;
 use App\Models\Page;
 use App\Models\Post;
 use App\Models\PostCategory;
+use App\Models\Produk;
 use App\Models\Santri;
 use App\Models\Setting;
+use App\Models\Supplier;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,7 +57,13 @@ class HomeController extends Controller
         $role = Auth::user()->jenis_user;
         if ($role == "admin"){
 
-            return view('back.dashboard');
+            $jml_supplier = Supplier::count();
+            $jml_produk = Produk::count();
+
+            $produk = Produk::limit(5)
+                ->get();
+
+            return view('back.dashboard',compact('jml_produk','jml_supplier','produk'));
 
         }else{
             return redirect(route('login'));

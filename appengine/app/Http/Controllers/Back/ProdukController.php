@@ -75,6 +75,44 @@ class ProdukController extends Controller
                     ->make(true);
     }
 
+    public function dataDashboard(Request $request)
+    {
+        $role = Auth::user()->jenis_user;
+        $data = Produk::select('*')
+            ->join('supplier','supplier.id_supplier','=','produk.id_supplier')
+            ->join('kategori','kategori.id_kategori','=','produk.id_kategori')
+            ->orderBy('id_produk', 'DESC')
+            ->limit(5)
+            ->get();
+
+        return Datatables::of($data)
+            ->addColumn('harga', function ($item) {
+
+                $harga =  "Rp. ".number_format($item->harga,0,',','.');
+                return $harga;
+
+            })
+            ->addColumn('_action', function ($item) {/*
+                         /*
+                         * L = Lihat => $lihat
+                         * C = Cetak => $cetak
+                         * E = Edit => $edit
+                         * H = Hapus => $hapus
+                         * R = Restore = $restore
+                         * M = Modal Dialog*/
+                $role = Auth::user()->jenis_user;
+                $lihat = route('produk.show', $item->id_produk);
+                $edit = route('produk.edit', $item->id_produk);
+                $hapus = route('produk.destroy', $item->id_produk);
+                $button = 'LEHRM';
+                return view('datatable._action_button', compact('item', 'button','lihat','edit', 'hapus'));
+
+            })
+            ->escapeColumns([])
+            ->addIndexColumn()
+            ->make(true);
+    }
+
 
     public function create()
     {

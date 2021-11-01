@@ -70,6 +70,7 @@ Route::group([
     'middleware' => 'auth'
 ], function () {
     Route::get('data', [\App\Http\Controllers\Back\ProdukController::class, 'data'])->name('produk.data');
+    Route::get('data-dashboard', [\App\Http\Controllers\Back\ProdukController::class, 'dataDashboard'])->name('produk.data-dashboard');
     Route::get('trash', [\App\Http\Controllers\Back\ProdukController::class, 'trash'])->name('produk.trash');
     Route::post('restore/{produk}', [\App\Http\Controllers\Back\ProdukController::class, 'restore'])->name('produk.restore');
 });

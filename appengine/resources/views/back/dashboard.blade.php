@@ -27,7 +27,7 @@
             <div class="p-3 bg-warning-400 rounded overflow-hidden position-relative text-white mb-g">
                 <div class="">
                     <h3 class="display-4 d-block l-h-n m-0 fw-500">
-                        0
+                        {{$jml_supplier}}
                         <small class="m-0 l-h-n">Jumlah Supplier</small>
                     </h3>
                 </div>
@@ -38,7 +38,7 @@
             <div class="p-3 bg-success-200 rounded overflow-hidden position-relative text-white mb-g">
                 <div class="">
                     <h3 class="display-4 d-block l-h-n m-0 fw-500">
-                       0
+                        {{$jml_produk}}
                         <small class="m-0 l-h-n">Jumlah Produk</small>
                     </h3>
                 </div>
@@ -62,21 +62,21 @@
             <div id="panel-2" class="panel panel-sortable" data-panel-fullscreen="false" role="widget">
                 <div class="panel-hdr" role="heading">
                     <h2 class="ui-sortable-handle">
-                        Data Produk Terbaru
+                        Data 5 Produk Terbaru
                     </h2>
                 </div>
                 <div class="panel-container show">
                     <div class="panel-content">
                         <!-- datatable start -->
-                        <table class="table table-bordered table-hover table-striped w-100" id="jadwal-table">
+                        <table class="table table-bordered table-hover table-striped w-100" id="produk-table">
                             <thead>
                             <tr>
                                 <td width="2%">No</td>
                                 <td>Nama</td>
                                 <td>Harga</td>
                                 <td>Stok</td>
+                                <td>Deskripsi</td>
                                 <td width="20%">Action</td>
-                            </tr>
                             </thead>
                         </table>
                         <!-- datatable end -->
@@ -105,7 +105,7 @@
         var table;
         $(function(){
             'use strict';
-            /*table = $('#jadwal-table').DataTable({
+            table = $('#produk-table').DataTable({
                 responsive: true,
                 language: {
                     searchPlaceholder: 'Cari...',
@@ -115,7 +115,7 @@
                 processing: true,
                 serverSide: true,
                 'ajax': {
-                    'url': '{{--{{ route('jadwal.data-cari-jadwal') }}--}}',
+                    'url': '{{ route('produk.data-dashboard') }}',
                     'type': 'GET',
                 },
                 columns: [
@@ -123,19 +123,16 @@
                         data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: true, searchable: false
                     },
                     {
-                        data: 'name', name: 'name', orderable: true,
+                        data: 'nama_produk', name: 'nama_produk', orderable: true,
                     },
                     {
-                        data: 'nip', name: 'nip', orderable: true,
+                        data: 'harga', name: 'harga', orderable: true,
                     },
                     {
-                        data: 'hari', name: 'hari', orderable: true,
+                        data: 'stok', name: 'stok', orderable: true,
                     },
                     {
-                        data: 'tanggal_jadwal', name: 'tanggal_jadwal', orderable: true,
-                    },
-                    {
-                        data: 'waktu', name: 'waktu', orderable: true,
+                        data: 'deskripsi_produk', name: 'deskripsi_produk', orderable: true,
                     },
                     {
                         data: '_action', name: '_action'
@@ -144,10 +141,10 @@
                 columnDefs: [
                     {
                         className: 'text-center',
-                        targets: [0, 1 , 6]
+                        targets: [0, 1 , 5]
                     }
                 ],
-            });*/
+            });
         });
     </script>
 @endpush
