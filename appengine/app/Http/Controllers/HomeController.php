@@ -11,6 +11,7 @@ use App\Models\Jabatan;
 use App\Models\Jadwal;
 use App\Models\JadwalAktivitas;
 use App\Models\JenisSk;
+use App\Models\Kategori;
 use App\Models\Kelas;
 use App\Models\OrangTua;
 use App\Models\Page;
@@ -72,7 +73,12 @@ class HomeController extends Controller
     }
 
     public function home(Request $request){
-        return view('front.app');
+
+        $kategori = Kategori::all();
+        $produk = Produk::limit(3)
+            ->get();
+
+        return view('front.app',compact('kategori','produk'));
     }
 
 

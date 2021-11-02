@@ -77,9 +77,16 @@ class KategoriController extends Controller
         $request->validated();
         $role = Auth::user()->jenis_user;
 
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $photo = round(microtime(true) * 1000) . '.' . $image->getClientOriginalExtension();
+            $image->move('img/kategori/', $photo);
+        }
+
         $save = Kategori::create([
             'nama_kategori' => $request->input('nama_kategori'),
-            'deskripsi_kategori' => $request->input('deskripsi_kategori')
+            'deskripsi_kategori' => $request->input('deskripsi_kategori'),
+            'foto_kategori' => $photo
         ]);
         if ($save) {
             return redirect(route('kategori.index'))
@@ -104,6 +111,14 @@ class KategoriController extends Controller
         $requestData = $request->all();
 
         $data = Kategori::findOrFail($id);
+
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $photo = round(microtime(true) * 1000) . '.' . $image->getClientOriginalExtension();
+            $image->move('img/kategori/', $photo);
+        }
+
+        $requestData['foto_kategori'] = $photo;
         $update = $data->update($requestData);
 
         if ($update) {

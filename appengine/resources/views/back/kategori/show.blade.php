@@ -61,6 +61,38 @@
                 </div>
             </div>
         </div>
+        <div class="col-sm-12 col-md-4">
+            <div class="panel">
+                <div class="panel-hdr">
+                    <h2>
+                        <strong id="title-table">Detail</strong> <span class="fw-300"><i>Kategori</i></span>
+                    </h2>
+                    <div class="panel-toolbar">
+                        <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
+                        <button class="btn btn-panel" data-action="panel-fullscreen" data-toggle="tooltip" data-offset="0,10" data-original-title="Fullscreen"></button>
+                        <button class="btn btn-panel" data-action="panel-close" data-toggle="tooltip" data-offset="0,10" data-original-title="Close"></button>
+                    </div>
+                </div>
+                <div class="panel-container show">
+                    <div class="panel-content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group mt-3">
+                                    <label class="form-label">Foto Kategori</label>
+                                    <div class="align-content-center text-center" style="margin-left: 30px;margin-right: 30px;">
+                                        @if($data->foto_kategori)
+                                            <img id="previewFoto" class="img-fluid" src="{{ asset('img/kategori/'.$data->foto_kategori) }}" height="250px" alt="">
+                                        @else
+                                            <img id="previewFoto" width="100%" height="250" src="{{asset('img/pegawai/padrao.png')}}">
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 @push('scripts')

@@ -18,6 +18,7 @@ class Kategori extends Model
         'id_kategori',
         'nama_kategori',
         'deskripsi_kategori',
+        'foto_kategori',
         'created_at',
         'updated_at'
     ];

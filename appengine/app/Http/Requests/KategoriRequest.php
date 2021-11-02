@@ -26,7 +26,8 @@ class KategoriRequest extends FormRequest
         return [
             //
             'nama_kategori' => 'required',
-            'deskripsi_kategori' => 'required'
+            'deskripsi_kategori' => 'required',
+            'foto' => 'required'
         ];
     }
 }

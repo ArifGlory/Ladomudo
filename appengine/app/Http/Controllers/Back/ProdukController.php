@@ -169,6 +169,14 @@ class ProdukController extends Controller
         $requestData = $request->all();
 
         $data = Produk::findOrFail($id);
+
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $photo = round(microtime(true) * 1000) . '.' . $image->getClientOriginalExtension();
+            $image->move('img/produk/', $photo);
+        }
+
+        $requestData['foto_produk'] = $photo;
         $update = $data->update($requestData);
 
         if ($update) {
