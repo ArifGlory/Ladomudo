@@ -16,9 +16,8 @@ Auth::routes([
 ]);
 
 //back-end
-Route::get('/', 'HomeController@dashboard')->middleware('auth')->name('dashboard');
+Route::get('/', 'HomeController@home')->name('home');
 Route::get('/dashboard', 'HomeController@dashboard')->middleware('auth')->name('dashboard');
-Route::get('/cari-jadwal', 'HomeController@cariJadwal')->middleware('auth')->name('cari-jadwal');
 
 
 Route::group([

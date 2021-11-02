@@ -71,9 +71,10 @@ class HomeController extends Controller
 
     }
 
-    public function cariJadwal(Request $request){
-        return view('back.jadwal.index_pegawai');
+    public function home(Request $request){
+        return view('front.app');
     }
+
 
 
 }
