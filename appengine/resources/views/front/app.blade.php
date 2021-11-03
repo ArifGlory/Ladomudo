@@ -30,6 +30,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ asset('front-end/css/custom.css')}}">
 
+    <link rel="stylesheet" media="screen, print" href="{{ asset('back-end/css/notifications/toastr/toastr.css') }}">
+    <link rel="stylesheet" media="screen, print" href="{{ asset('back-end/css/notifications/sweetalert2/sweetalert2.bundle.css') }}">
+
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -329,6 +332,8 @@
 <script src="{{ asset('front-end/js/form-validator.min.js')}}"></script>
 <script src="{{ asset('front-end/js/contact-form-script.js')}}"></script>
 <script src="{{ asset('front-end/js/custom.js')}}"></script>
+<script src="{{ asset('back-end/js/notifications/toastr/toastr.js') }}"></script>
+<script src="{{ asset('back-end/js/notifications/sweetalert2/sweetalert2.bundle.js') }}"></script>
 
 <script>
     $(document).ready(function () {
@@ -339,6 +344,37 @@
                 console.log("kata kunci : "+keyword);
             }
         });
+    });
+</script>
+<script !src="">
+    function showLoading(bool) {
+        if(bool) {
+            $('#loading').show();
+        } else {
+            $('#loading').attr("style", "display: none !important");
+        }
+    }
+    $(document).ready(function () {
+        @if(session('pesan_status'))
+            toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-right",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": 300,
+            "hideDuration": 100,
+            "timeOut": 5000,
+            "extendedTimeOut": 1000,
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        }
+        toastr['{{session('pesan_status.tipe')}}']('{{session('pesan_status.desc')}}', '{{session('pesan_status.judul')}}');
+        @endif
     });
 </script>
 

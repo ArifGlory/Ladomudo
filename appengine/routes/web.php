@@ -78,6 +78,17 @@ Route::group([
 });
 Route::resource('produk', 'Back\ProdukController')->middleware('auth');
 
+Route::get('/keranjang', 'KeranjangController@index')->middleware('auth')->name('keranjang');
+Route::group([
+    'prefix' => 'keranjang',
+    'middleware' => 'auth'
+], function () {
+    Route::get('data', [\App\Http\Controllers\KeranjangController::class, 'data'])->name('keranjang.data');
+    Route::get('trash', [\App\Http\Controllers\KeranjangController::class, 'trash'])->name('keranjang.trash');
+    Route::post('restore/{keranjang}', [\App\Http\Controllers\KeranjangController::class, 'restore'])->name('keranjang.restore');
+});
+Route::resource('keranjang', 'KeranjangController')->middleware('auth');
+
 
 
 
