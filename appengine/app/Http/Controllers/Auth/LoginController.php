@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 session_start();
 
@@ -65,7 +66,13 @@ class LoginController extends Controller
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
             unset($_SESSION["error_login"]);
-            return redirect()->route('dashboard');
+            $role = Auth::user()->jenis_user;
+            if ($role == "admin"){
+                return redirect()->route('dashboard');
+            }else{
+                return redirect()->route('home');
+            }
+
         }else{
             $_SESSION["error_login"] = "Login gagal, cek email atau password anda";
 

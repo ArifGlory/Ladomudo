@@ -48,13 +48,13 @@
                 </div>
                 <div class="our-link">
                     <ul>
-                        <li><a href="#"><i class="fa fa-user s_color"></i> Akun Saya</a></li>
+                        <li><a href="#"><i class="fa fa-user s_color"></i> {{ Auth::user()->name ?? "Akun Saya" }}</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="login-box">
-                    <a class="btn hvr-hover text-white" data-fancybox-close="" href="#">Login</a>
+                    <a class="btn hvr-hover text-white" data-fancybox-close="" href="{{route('login')}}">Login</a>
                 </div>
             </div>
         </div>
