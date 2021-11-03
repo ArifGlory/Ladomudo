@@ -86,9 +86,23 @@ class HomeController extends Controller
     }
 
     public  function produk(Request $request){
-        $produk = Produk::paginate(10);
+
+        $keyword = $request->get('keyword');
+
+        if ($keyword != null || $keyword != "") {
+            $produk = Produk::whereRaw('LOWER(nama_produk) LIKE ? ', [trim(strtolower($keyword)) . '%'])
+            ->paginate(10);
+            $count_produk = Produk::whereRaw('LOWER(nama_produk) LIKE ? ', [trim(strtolower($keyword)) . '%'])
+                ->count();
+
+        }else{
+            $produk = Produk::paginate(10);
+            $count_produk = Produk::count();
+        }
+
+
         $kategori = Kategori::all();
-        $count_produk = Produk::count();
+
 
         return view('front.produk',compact('produk','count_produk','kategori'));
     }

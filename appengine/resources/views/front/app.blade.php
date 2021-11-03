@@ -138,9 +138,11 @@
 <div class="top-search">
     <div class="container">
         <div class="input-group">
-            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" placeholder="Search">
-            <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            <form id="search-form" action="{{ route('shop') }}" method="GET">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" id="keyword" name="keyword" class="form-control" placeholder="Search">
+                <span class="input-group-addon close-search"><i class="fa fa-times"></i></span>
+            </form>
         </div>
     </div>
 </div>
@@ -155,7 +157,7 @@
             <div class="ins-inner-box">
                 <img src="{{ asset('front-end/images/instagram-img-01.jpg')}}" alt="" />
                 <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#">{{--<i class="fab fa-instagram"></i>--}}</a>
                 </div>
             </div>
         </div>
@@ -163,7 +165,7 @@
             <div class="ins-inner-box">
                 <img src="{{ asset('front-end/images/instagram-img-02.jpg')}}" alt="" />
                 <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#">{{--<i class="fab fa-instagram"></i>--}}</a>
                 </div>
             </div>
         </div>
@@ -171,7 +173,7 @@
             <div class="ins-inner-box">
                 <img src="{{ asset('front-end/images/instagram-img-03.jpg')}}" alt="" />
                 <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#">{{--<i class="fab fa-instagram"></i>--}}</a>
                 </div>
             </div>
         </div>
@@ -179,7 +181,7 @@
             <div class="ins-inner-box">
                 <img src="{{ asset('front-end/images/instagram-img-04.jpg')}}" alt="" />
                 <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#">{{--<i class="fab fa-instagram"></i>--}}</a>
                 </div>
             </div>
         </div>
@@ -187,7 +189,7 @@
             <div class="ins-inner-box">
                 <img src="{{ asset('front-end/images/instagram-img-05.jpg')}}" alt="" />
                 <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#">{{--<i class="fab fa-instagram"></i>--}}</a>
                 </div>
             </div>
         </div>
@@ -195,7 +197,7 @@
             <div class="ins-inner-box">
                 <img src="{{ asset('front-end/images/instagram-img-06.jpg')}}" alt="" />
                 <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#">{{--<i class="fab fa-instagram"></i>--}}</a>
                 </div>
             </div>
         </div>
@@ -203,7 +205,7 @@
             <div class="ins-inner-box">
                 <img src="{{ asset('front-end/images/instagram-img-07.jpg')}}" alt="" />
                 <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#">{{--<i class="fab fa-instagram"></i>--}}</a>
                 </div>
             </div>
         </div>
@@ -211,7 +213,7 @@
             <div class="ins-inner-box">
                 <img src="{{ asset('front-end/images/instagram-img-08.jpg')}}" alt="" />
                 <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#">{{--<i class="fab fa-instagram"></i>--}}</a>
                 </div>
             </div>
         </div>
@@ -219,7 +221,7 @@
             <div class="ins-inner-box">
                 <img src="{{ asset('front-end/images/instagram-img-09.jpg')}}" alt="" />
                 <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#">{{--<i class="fab fa-instagram"></i>--}}</a>
                 </div>
             </div>
         </div>
@@ -227,7 +229,7 @@
             <div class="ins-inner-box">
                 <img src="{{ asset('front-end/images/instagram-img-05.jpg')}}" alt="" />
                 <div class="hov-in">
-                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#">{{--<i class="fab fa-instagram"></i>--}}</a>
                 </div>
             </div>
         </div>
@@ -315,6 +317,19 @@
 <script src="{{ asset('front-end/js/form-validator.min.js')}}"></script>
 <script src="{{ asset('front-end/js/contact-form-script.js')}}"></script>
 <script src="{{ asset('front-end/js/custom.js')}}"></script>
+
+<script>
+    $(document).ready(function () {
+
+        $("#keyword").on('keyup', function (e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                var keyword = $("#keyword").val();
+                console.log("kata kunci : "+keyword);
+            }
+        });
+    });
+</script>
+
 </body>
 
 </html>

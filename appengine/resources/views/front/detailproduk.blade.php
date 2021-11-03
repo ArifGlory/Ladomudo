@@ -59,7 +59,8 @@
                 <div class="col-xl-7 col-lg-7 col-md-6">
                     <div class="single-product-details">
                         <h2> {{$data->nama_produk}} </h2>
-                        <h5>  Rp . {{number_format($data->harga,0,',','.')}}</h5>
+                        <h4 class="mt-0"> Kategori  {{$data->nama_kategori}} </h4>
+                        <h5 class="mt-4">  Rp . {{number_format($data->harga,0,',','.')}}</h5>
                         <p class="available-stock"><span> Stok Tersisa {{$data->stok}} available</span><p>
                         <h4>Deskripsi:</h4>
                         <p> {{$data->deskripsi_produk}} </p>
