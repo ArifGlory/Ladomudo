@@ -78,7 +78,29 @@ class HomeController extends Controller
         $produk = Produk::limit(3)
             ->get();
 
-        return view('front.app',compact('kategori','produk'));
+        return view('front.home',compact('kategori','produk'));
+    }
+
+    public function tentangKami(Request $request){
+        return view('front.tentang');
+    }
+
+    public  function produk(Request $request){
+        $produk = Produk::paginate(10);
+        $kategori = Kategori::all();
+        $count_produk = Produk::count();
+
+        return view('front.produk',compact('produk','count_produk','kategori'));
+    }
+
+    public function produkDetail($id){
+        $data = Produk::select('*')
+            ->join('supplier','supplier.id_supplier','=','produk.id_supplier')
+            ->join('kategori','kategori.id_kategori','=','produk.id_kategori')
+            ->where('produk.id_produk',$id)
+            ->first();
+
+        return view('front.detailproduk',compact('data'));
     }
 
 

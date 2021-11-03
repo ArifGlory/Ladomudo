@@ -17,6 +17,9 @@ Auth::routes([
 
 //back-end
 Route::get('/', 'HomeController@home')->name('home');
+Route::get('/shop', 'HomeController@produk')->name('shop');
+Route::get('/tentang', 'HomeController@tentangKami')->name('tentang');
+Route::get('/shop/shop-detail/{id}', 'HomeController@produkDetail')->name('shop-detail');
 Route::get('/dashboard', 'HomeController@dashboard')->middleware('auth')->name('dashboard');
 
 
