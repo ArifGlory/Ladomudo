@@ -54,7 +54,19 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                 <div class="login-box">
-                    <a class="btn hvr-hover text-white" data-fancybox-close="" href="{{route('login')}}">Login</a>
+                    @if (Auth::check())
+                        <a class="btn hvr-hover text-white" href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                            <span data-i18n="drpdwn.page-logout">Logout</span>
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                              style="display: none;">
+                            @csrf
+                        </form>
+                    @else
+                        <a class="btn hvr-hover text-white" data-fancybox-close="" href="{{route('login')}}">Login</a>
+                    @endif
                 </div>
             </div>
         </div>
