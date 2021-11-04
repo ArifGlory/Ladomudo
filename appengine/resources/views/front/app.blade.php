@@ -32,6 +32,7 @@
 
     <link rel="stylesheet" media="screen, print" href="{{ asset('back-end/css/notifications/toastr/toastr.css') }}">
     <link rel="stylesheet" media="screen, print" href="{{ asset('back-end/css/notifications/sweetalert2/sweetalert2.bundle.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -97,6 +98,7 @@
                     <li class="nav-item active"><a class="nav-link" href="{{url('/')}}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('/tentang')}}">Tentang Kami</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{url('/shop')}}">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{url('/keranjang')}}">Keranjang</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -105,19 +107,12 @@
             <div class="attr-nav">
                 <ul>
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                    <li class="side-menu">
-                        <a href="#">
-                            <i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
-                            <p>Keranjang Belanja</p>
-                        </a>
-                    </li>
                 </ul>
             </div>
             <!-- End Atribute Navigation -->
         </div>
         <!-- Start Side Menu -->
-        <div class="side">
+        {{--<div class="side">
             <a href="#" class="close-side"><i class="fa fa-times"></i></a>
             <li class="cart-box">
                 <ul class="cart-list">
@@ -137,12 +132,12 @@
                         <p>1x - <span class="price">$40.00</span></p>
                     </li>
                     <li class="total">
-                        <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
+                        <a href="#" class="btn btn-default hvr-hover btn-cart">Lihat Keranjang</a>
                         <span class="float-right"><strong>Total</strong>: $180.00</span>
                     </li>
                 </ul>
             </li>
-        </div>
+        </div>--}}
         <!-- End Side Menu -->
     </nav>
     <!-- End Navigation -->
@@ -377,7 +372,7 @@
         @endif
     });
 </script>
-
+@stack('scripts')
 </body>
 
 </html>

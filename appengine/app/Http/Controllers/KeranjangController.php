@@ -1,13 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\Back;
+namespace App\Http\Controllers;
 
 use App\Http\Requests\ImportRequest;
 use App\Http\Requests\KategoriRequest;
+use App\Http\Requests\KeranjangRequest;
 use App\Imports\SantriDataImport;
 // use App\Models\PangkatGolongan;
+use App\Models\DetailTransaksi;
 use App\Models\Kategori;
 use App\Models\Keranjang;
+use App\Models\Transaksi;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,8 +32,8 @@ class KeranjangController extends Controller
     public function index(Request $request)
     {
         //
-        $keranjang = Keranjang::select('keranjang.*','produk.nama_produk')
-            ->join('user','keranjang.id_user','=','user.id')
+        $keranjang = Keranjang::select('keranjang.*','produk.nama_produk','produk.foto_produk','produk.harga')
+            ->join('users','keranjang.id_user','=','users.id')
             ->join('produk','keranjang.id_produk','=','produk.id_produk')
             ->where('keranjang.id_user',Auth::user()->id)
             ->get();
@@ -46,7 +49,7 @@ class KeranjangController extends Controller
     {
                 $role = Auth::user()->jenis_user;
                 $data = Keranjang::select('keranjang.*','produk.nama_produk')
-                    ->join('user','keranjang.id_user','=','user.id')
+                    ->join('users','keranjang.id_user','=','users.id')
                     ->join('produk','keranjang.id_produk','=','produk.id_produk')
                     ->orderBy('id_keranjang', 'DESC')
                     ->get();
@@ -61,12 +64,10 @@ class KeranjangController extends Controller
 
     }
 
-    public function store(KategoriRequest $request)
+    public function store(Request $request)
     {
         //
-        $request->validated();
         $role = Auth::user()->jenis_user;
-
 
         $save = Keranjang::create([
             'id_produk' => $request->input('id_produk'),
@@ -89,37 +90,58 @@ class KeranjangController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
-    {
-        //
-
-        $requestData = $request->all();
-
-        $data = Kategori::findOrFail($id);
-
-        if ($request->hasFile('foto')) {
-            $image = $request->file('foto');
-            $photo = round(microtime(true) * 1000) . '.' . $image->getClientOriginalExtension();
-            $image->move('img/kategori/', $photo);
+    public function checkout(Request $request){
+        $keranjang = Keranjang::select('keranjang.*','produk.nama_produk','produk.foto_produk','produk.harga','produk.id_produk')
+            ->join('users','keranjang.id_user','=','users.id')
+            ->join('produk','keranjang.id_produk','=','produk.id_produk')
+            ->where('keranjang.id_user',Auth::user()->id)
+            ->get();
+        $total_semua = 0;
+        foreach ($keranjang as $val){
+            $subtotal = $val->jumlah_beli * $val->harga;
+            $total_semua = $total_semua + $subtotal;
         }
 
-        $requestData['foto_kategori'] = $photo;
-        $update = $data->update($requestData);
+        $save_trans = Transaksi::create([
+            'id_user' => Auth::user()->id,
+            'total_harga' => $total_semua
+        ]);
+        if ($save_trans){
+            $id_transaksi = $save_trans->id_transaksi;
 
-        if ($update) {
-            return redirect(route('kategori.index'))
-                ->with('pesan_status', [
-                    'tipe' => 'info',
-                    'desc' => 'Data Berhasil diupdate',
-                    'judul' => 'Data kategori'
+            foreach ($keranjang as $value){
+
+                $save_dt_trans = DetailTransaksi::create([
+                    'id_user' => Auth::user()->id,
+                    'id_transaksi' => $id_transaksi,
+                    'id_produk' => $value->id_produk,
+                    'jumlah_beli' => $value->jumlah_beli,
                 ]);
-        } else {
+
+                //hapus dari cart
+                $info = Keranjang::find($value->id_keranjang);
+                $delete = $info->forceDelete();
+            }
+
+            return redirect(route('keranjang.index'))
+                ->with('pesan_status',[
+                    'tipe' => 'info',
+                    'desc' => 'Checkout Berhasil ! , Jangan lupa mengirim bukti bayar anda',
+                    'judul' => 'Data checkout'
+                ]);
+
+        }else{
             Redirect::back()->with('pesan_status', [
-                'tipe' => 'error',
+                'tipe' => 'danger',
                 'desc' => 'Server Error',
                 'judul' => 'Terdapat kesalahan pada server.'
             ]);
         }
+    }
+
+    public function update(Request $request, $id)
+    {
+        //
 
     }
 
@@ -137,14 +159,45 @@ class KeranjangController extends Controller
         //
 
         $info = Keranjang::find($id);
-        $delete = $info->destroy($id);
+        $delete = $info->forceDelete();
 
         $response = [];
-        if($delete) {
-            return Respon('', true, 'Berhasil menghapus data', 200);
-
+        if ($delete) {
+            return redirect(route('keranjang.index'))
+                ->with('pesan_status',[
+                    'tipe' => 'info',
+                    'desc' => 'Berhasil menghapus dari keranjang',
+                    'judul' => 'Data keranjang'
+                ]);
         } else {
-            return Respon('', false, 'Gagal menghapus data', 200);
+            Redirect::back()->with('pesan_status', [
+                'tipe' => 'danger',
+                'desc' => 'Server Error',
+                'judul' => 'Terdapat kesalahan pada server.'
+            ]);
+        }
+    }
+
+    public function hapus($id)
+    {
+        //
+
+        $info = Keranjang::find($id);
+        $delete = $info->forceDelete();
+
+        if ($delete) {
+            return redirect(route('keranjang.index'))
+                ->with('pesan_status',[
+                    'tipe' => 'info',
+                    'desc' => 'Berhasil menghapus dari keranjang',
+                    'judul' => 'Data keranjang'
+                ]);
+        } else {
+            Redirect::back()->with('pesan_status', [
+                'tipe' => 'danger',
+                'desc' => 'Server Error',
+                'judul' => 'Terdapat kesalahan pada server.'
+            ]);
         }
     }
 

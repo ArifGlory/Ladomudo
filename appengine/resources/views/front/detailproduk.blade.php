@@ -57,29 +57,32 @@
                     </div>
                 </div>
                 <div class="col-xl-7 col-lg-7 col-md-6">
-                    <div class="single-product-details">
-                        <h2> {{$data->nama_produk}} </h2>
-                        <h4 class="mt-0"> Kategori  {{$data->nama_kategori}} </h4>
-                        <h5 class="mt-4">  Rp . {{number_format($data->harga,0,',','.')}}</h5>
-                        <p class="available-stock"><span> Stok Tersisa {{$data->stok}} available</span><p>
-                        <h4>Deskripsi:</h4>
-                        <p> {{$data->deskripsi_produk}} </p>
-                        <ul>
-                            <li>
-                                <div class="form-group quantity-box">
-                                    <label class="control-label">Jumlah Pembelian</label>
-                                    <input class="form-control" value="0" min="0" max="20" type="number">
+                    {!! Form::open(['route' => 'keranjang.store', 'method' => 'POST', 'id' => 'form-produk', 'files' => true]) !!}
+                        <div class="single-product-details">
+                            <h2> {{$data->nama_produk}} </h2>
+                            <h4 class="mt-0"> Kategori  {{$data->nama_kategori}} </h4>
+                            <h5 class="mt-4">  Rp . {{number_format($data->harga,0,',','.')}}</h5>
+                            <p class="available-stock"><span> Stok Tersisa {{$data->stok}} available</span><p>
+                            <h4>Deskripsi:</h4>
+                            <p> {{$data->deskripsi_produk}} </p>
+                            <ul>
+                                <input name="id_produk" type="hidden" value="{{$data->id_produk}}">
+                                <li>
+                                    <div class="form-group quantity-box">
+                                        <label class="control-label">Jumlah Pembelian</label>
+                                        <input required name="jumlah_beli" class="form-control" value="0" min="1" max="{{$data->stok}}" type="number">
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="price-box-bar">
+                                <div class="cart-and-bay-btn">
+                                    <button class="ml-auto btn hvr-hover text-white"  type="submit">Tambah ke Keranjang</button>
                                 </div>
-                            </li>
-                        </ul>
-
-                        <div class="price-box-bar">
-                            <div class="cart-and-bay-btn">
-                                <a class="btn hvr-hover" data-fancybox-close="" href="#">Tambah ke Keranjang</a>
                             </div>
-                        </div>
 
-                    </div>
+                        </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
 
@@ -291,3 +294,33 @@
     </div>
     <!-- End Cart -->
 @endsection
+
+@push('scripts')
+    @include('layouts.partials._helper_js')
+    <script src="{{ asset('back-end/js/formplugins/select2/select2.bundle.js') }}"></script>
+    <script>
+
+        function saveData() {
+            event.preventDefault();
+            swal.fire({
+                title: "Submit?",
+                text: "Pastikan kembali data yang diisi.",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-info",
+                cancelButtonClass: "btn-danger",
+                confirmButtonText: "Simpan",
+                cancelButtonText: "Tidak",
+            }).then((result) => {
+                if (result.value) {
+                    $('#form-produk').submit()
+                    showLoading(true);
+                }
+            })
+        }
+        $('.select2').select2({
+            width: '100%',
+            placeholder: "Pilih.."
+        })
+    </script>
+@endpush
