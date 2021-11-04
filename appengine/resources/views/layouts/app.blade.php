@@ -114,12 +114,16 @@
                     </div>
                 </div>
                 <div class="info-card">
-                    <img src="{{ asset('img/pegawai/'.Auth::user()->foto) }}" class="profile-image rounded-circle" alt="User">
+                    @if (Auth::check())
+                        <img src="{{ asset('user'.Auth::user()->foto) }}" class="profile-image rounded-circle" alt="User">
+                    @endif
                     <div class="info-card-text">
                         <a href="#" class="d-flex align-items-center text-white">
+                            @if (Auth::check())
                                     <span class="font-weight-bold text-truncate text-truncate-sm d-inline-block">
                                         {{ Auth::user()->name}}
                                     </span>
+                            @endif
                         </a>
                         <span class="d-inline-block text-truncate text-truncate-sm">{{  getSettingData('web_name')->value ?? env('APP_NAME') }}</span>
                     </div>

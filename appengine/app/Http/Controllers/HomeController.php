@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Fungsional;
+use App\Http\Requests\UserRequest;
 use App\Models\Cuti;
 use App\Models\Dokumen;
 use App\Models\Iklan;
@@ -26,6 +27,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Vinkla\Hashids\Facades\Hashids;
 use Yajra\DataTables\DataTables;
@@ -52,6 +54,38 @@ class HomeController extends Controller
 
     }
 
+    public function daftar(){
+        return view('auth.register');
+    }
+
+    public function storeUser(UserRequest $request){
+        $request->validated();
+
+       // $request_data = $request->all();
+
+        $store = User::create([
+            'email' => $request->input('email'),
+            'name' => $request->input('name'),
+            'phone' => $request->input('phone'),
+            'alamat' => $request->input('alamat'),
+            'password' => $request->input('password')
+        ]);
+
+        if ($store) {
+            return redirect(route('login'))
+                ->with('pesan_status', [
+                    'tipe' => 'info',
+                    'desc' => 'Berhasil mendaftar akun',
+                    'judul' => 'Anda dapat melakukan login'
+                ]);
+        } else {
+            Redirect::back()->with('pesan_status', [
+                'tipe' => 'danger',
+                'desc' => 'Server Error',
+                'judul' => 'Terdapat kesalahan pada server.'
+            ]);
+        }
+    }
 
     public function dashboard(Request $request){
 

@@ -5,10 +5,10 @@ class UserRequest extends FormRequest
 {
     protected $rules = [
         'email' => 'required|email',
-        'name' => 'required|string|max:50',
-        'password' => 'max:50',
-        'username' => 'required|max:12',
-        'photo' => 'mimes:jpeg,bmp,png'
+        'name' => 'required|string|max:100',
+        'password' => 'max:50|required',
+        'phone' => 'required',
+        'alamat' => 'required',
     ];
 
     /**
@@ -28,11 +28,11 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-        'email' => 'required|email',
-        'nama_lengkap' => 'required|string|max:50',
-        'password' => 'max:50',
-        'username' => 'required|max:12',
-        'photo' => 'mimes:jpeg,bmp,png'
+            'email' => 'required|email',
+            'name' => 'required|string|max:100',
+            'password' => 'max:50|required',
+            'phone' => 'required',
+            'alamat' => 'required',
         ];
     }
      /**
@@ -44,8 +44,7 @@ class UserRequest extends FormRequest
     {
         return [
             'email.required' => 'Email dibutuhkan!',
-            'nama_lengkap.required' => 'Nama Lengkap dibutuhkan!',
-            'username.required' => 'Username dibutuhkan!',
+            'name.required' => 'Nama Lengkap dibutuhkan!',
             'password.required' => 'Password dibutuhkan',
             'name.max' => 'Tidak boleh melebihi batas'
         ];

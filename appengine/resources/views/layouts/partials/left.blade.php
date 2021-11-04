@@ -5,7 +5,6 @@
                 <span class="nav-link-text text-white" data-i18n="nav.dashboard">Dashboard</span>
         </a>
     </li>
-    @if(Auth::user()->jenis_user == "admin")
         <li class="nav-title text-black-50">Data Master</li>
         <li class="{{ Nav::isRoute('kategori', 'active') }}">
             <a href="{{ url('/kategori') }}" title="Kategori" data-filter-tags="kategori">
@@ -25,7 +24,6 @@
                 <span class="nav-link-text text-white" data-i18n="nav.supplier">Supplier</span>
             </a>
         </li>
-    @endif
     <li class="nav-title text-black-50">Others</li>
     <li class="{{ Nav::isResource('setting', NULL, 'active') }}">
         <a href="{{ route('setting.index') }}" title="Setting" data-filter-tags="setting">

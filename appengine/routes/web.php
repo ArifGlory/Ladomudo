@@ -17,6 +17,8 @@ Auth::routes([
 
 //back-end
 Route::get('/', 'HomeController@home')->name('home');
+Route::get('/daftar', 'HomeController@daftar')->name('daftar');
+Route::post('/daftar/simpan', 'HomeController@storeUser')->name('daftar.simpan');
 Route::get('/shop', 'HomeController@produk')->name('shop');
 Route::get('/tentang', 'HomeController@tentangKami')->name('tentang');
 Route::get('/shop/shop-detail/{id}', 'HomeController@produkDetail')->name('shop-detail');

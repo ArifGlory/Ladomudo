@@ -38,7 +38,18 @@
                     @endif
                     {{--<strong>{{ $_SESSION["ngehe"] }}</strong>--}}
                 </div>
-                <button type="submit" class="btn btn-success btn-round float-right"><span class="fal fa-sign-in"></span> Login</button>
+                <div class="col-md-12">
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-round"><span class="fal fa-sign-in"></span> Login</button>
+                        <br>
+                        <br>
+                        <p> Belum Punya Akun ?</p>
+                        <br>
+                        <a href="{{route('daftar')}}" class="btn btn-success btn-round text-white"><span class="fal fa-registered"></span> Daftar</a>
+                    </div>
+
+                </div>
+
             </form>
         </div>
     </div>
