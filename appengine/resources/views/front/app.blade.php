@@ -52,7 +52,7 @@
                 </div>
                 <div class="our-link">
                     <ul>
-                        <li><a href="#"><i class="fa fa-user s_color"></i> {{ Auth::user()->name ?? "Akun Saya" }}</a></li>
+                        <li><a href="{{url('/akun-saya')}}"><i class="fa fa-user s_color"></i> {{ Auth::user()->name ?? "Akun Saya" }}</a></li>
                     </ul>
                 </div>
             </div>

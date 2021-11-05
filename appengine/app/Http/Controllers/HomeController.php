@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Fungsional;
 use App\Http\Requests\UserRequest;
 use App\Models\Cuti;
+use App\Models\DetailTransaksi;
 use App\Models\Dokumen;
 use App\Models\Iklan;
 use App\Models\Infografis;
@@ -22,6 +23,7 @@ use App\Models\Produk;
 use App\Models\Santri;
 use App\Models\Setting;
 use App\Models\Supplier;
+use App\Models\Transaksi;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -117,6 +119,24 @@ class HomeController extends Controller
 
     public function tentangKami(Request $request){
         return view('front.tentang');
+    }
+
+    public function userAccount(Request $request){
+        $transaksi = Transaksi::where('id_user',Auth::user()->id)
+            ->orderBy('created_at',"DESC")
+            ->get();
+
+        return view('front.akun',compact('transaksi'));
+    }
+
+    public function detailTransaksi($id_transaksi){
+        $detail_trans = DetailTransaksi::join('produk','produk.id_produk','=','detail_transaksi.id_produk')
+            ->where('id_transaksi',$id_transaksi)
+            ->get();
+        $transaksi = Transaksi::where('id_transaksi',$id_transaksi)
+            ->first();
+
+        return view('front.detailtransaksi',compact('transaksi','detail_trans'));
     }
 
     public  function produk(Request $request){

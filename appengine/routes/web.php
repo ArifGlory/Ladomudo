@@ -22,6 +22,8 @@ Route::post('/daftar/simpan', 'HomeController@storeUser')->name('daftar.simpan')
 Route::get('/shop', 'HomeController@produk')->name('shop');
 Route::get('/tentang', 'HomeController@tentangKami')->name('tentang');
 Route::get('/shop/shop-detail/{id}', 'HomeController@produkDetail')->name('shop-detail');
+Route::get('/akun-saya', 'HomeController@userAccount')->middleware('auth')->name('akun-saya');
+Route::get('/detail-transaksi/{id}', 'HomeController@detailTransaksi')->middleware('auth')->name('detail-transaksi');
 Route::get('/dashboard', 'HomeController@dashboard')->middleware('auth')->name('dashboard');
 
 
