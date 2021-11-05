@@ -399,11 +399,11 @@
                     <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
                         @if(Auth::user()->foto)
                             <span class="mr-2">
-                                <img src="{{ asset('img/pegawai/'.Auth::user()->foto) }}" class="rounded-circle profile-image" alt="imgprofil">
+                                <img src="{{ asset('img/user/'.Auth::user()->foto) }}" class="rounded-circle profile-image" alt="imgprofil">
                             </span>
                         @else
                             <span class="mr-2">
-                                <img src="{{ asset('img/pegawai/padrao.png') }}" class="rounded-circle profile-image" alt="imgprofil">
+                                <img src="{{ asset('img/user/padrao.png') }}" class="rounded-circle profile-image" alt="imgprofil">
                             </span>
                         @endif
 

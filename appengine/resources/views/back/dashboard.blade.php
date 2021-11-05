@@ -49,7 +49,7 @@
             <div class="p-3 bg-success-200 rounded overflow-hidden position-relative text-white mb-g">
                 <div class="">
                     <h3 class="display-4 d-block l-h-n m-0 fw-500">
-                        0
+                        {{$jml_konsumen}}
                         <small class="m-0 l-h-n">Jumlah Konsumen</small>
                     </h3>
                 </div>

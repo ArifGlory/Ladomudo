@@ -96,11 +96,13 @@ class HomeController extends Controller
 
             $jml_supplier = Supplier::count();
             $jml_produk = Produk::count();
+            $jml_konsumen = User::where('jenis_user',"user")
+                ->count();
 
             $produk = Produk::limit(5)
                 ->get();
 
-            return view('back.dashboard',compact('jml_produk','jml_supplier','produk'));
+            return view('back.dashboard',compact('jml_produk','jml_supplier','produk','jml_konsumen'));
 
         }else{
             return redirect(route('login'));

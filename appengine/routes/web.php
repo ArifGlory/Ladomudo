@@ -97,6 +97,17 @@ Route::group([
 });
 Route::resource('keranjang', 'KeranjangController')->middleware('auth');
 
+Route::get('/transaksi', 'Back\TransaksiController@index')->middleware('auth')->name('transaksi');
+Route::group([
+    'prefix' => 'transaksi',
+    'middleware' => 'auth'
+], function () {
+    Route::get('data', [\App\Http\Controllers\Back\TransaksiController::class, 'data'])->name('transaksi.data');
+    Route::get('trash', [\App\Http\Controllers\Back\TransaksiController::class, 'trash'])->name('transaksi.trash');
+    Route::post('restore/{transaksi}', [\App\Http\Controllers\Back\TransaksiController::class, 'restore'])->name('transaksi.restore');
+});
+Route::resource('transaksi', 'Back\TransaksiController')->middleware('auth');
+
 
 
 

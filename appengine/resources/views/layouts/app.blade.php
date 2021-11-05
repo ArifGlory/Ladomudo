@@ -115,7 +115,7 @@
                 </div>
                 <div class="info-card">
                     @if (Auth::check())
-                        <img src="{{ asset('user'.Auth::user()->foto) }}" class="profile-image rounded-circle" alt="User">
+                        <img src="{{ asset('img/user/'.Auth::user()->foto) }}" class="profile-image rounded-circle" alt="User">
                     @endif
                     <div class="info-card-text">
                         <a href="#" class="d-flex align-items-center text-white">

@@ -25,10 +25,10 @@
             </a>
         </li>
     <li class="nav-title text-black-50">Others</li>
-    <li class="{{ Nav::isResource('setting', NULL, 'active') }}">
-        <a href="{{ route('setting.index') }}" title="Setting" data-filter-tags="setting">
+    <li class="{{ Nav::isResource('transaksi', NULL, 'active') }}">
+        <a href="{{ route('transaksi.index') }}" title="Setting" data-filter-tags="transaksi">
             <i class="fal fa-money-bill text-white"></i>
-            <span class="nav-link-text text-white" data-i18n="nav.setting">Transaksi</span>
+            <span class="nav-link-text text-white" data-i18n="nav.transaksi">Transaksi</span>
         </a>
     </li>
     <li class="{{ Nav::isResource('setting', NULL, 'active') }}">
