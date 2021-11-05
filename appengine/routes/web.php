@@ -102,6 +102,7 @@ Route::group([
     'prefix' => 'transaksi',
     'middleware' => 'auth'
 ], function () {
+    Route::get('laporan', [\App\Http\Controllers\Back\TransaksiController::class, 'cetakLaporan'])->name('transaksi.laporan');
     Route::get('data', [\App\Http\Controllers\Back\TransaksiController::class, 'data'])->name('transaksi.data');
     Route::get('trash', [\App\Http\Controllers\Back\TransaksiController::class, 'trash'])->name('transaksi.trash');
     Route::post('restore/{transaksi}', [\App\Http\Controllers\Back\TransaksiController::class, 'restore'])->name('transaksi.restore');

@@ -19,7 +19,7 @@
             </small>
         </h1>
         <div class="btn-group btn-group-sm text-center float-right">
-            <a href="{{ url('/transaksi/laporan') }}" class="btn btn-primary btn-mini waves-effect waves-light"><span class="fal fa-plus"></span> Cetak Laporan</a>
+            <a href="{{ url('/transaksi/laporan') }}" class="btn btn-warning btn-mini waves-effect waves-light"><span class="fal fa-print"></span> Cetak Laporan</a>
         </div>
     </div>
 @endsection
