@@ -23,6 +23,8 @@ Route::get('/shop', 'HomeController@produk')->name('shop');
 Route::get('/tentang', 'HomeController@tentangKami')->name('tentang');
 Route::get('/shop/shop-detail/{id}', 'HomeController@produkDetail')->name('shop-detail');
 Route::get('/akun-saya', 'HomeController@userAccount')->middleware('auth')->name('akun-saya');
+Route::get('/bukti-bayar/{id_trans}', 'HomeController@buktiBayar')->middleware('auth')->name('bukti-bayar');
+Route::post('/bukti-bayar/simpan', 'HomeController@buktiBayarStore')->middleware('auth')->name('bukti-bayar.store');
 Route::get('/detail-transaksi/{id}', 'HomeController@detailTransaksi')->middleware('auth')->name('detail-transaksi');
 Route::get('/dashboard', 'HomeController@dashboard')->middleware('auth')->name('dashboard');
 

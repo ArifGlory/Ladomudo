@@ -32,6 +32,11 @@
                                 <h4> <span class="badge badge-primary p-2">Status Transaksi : {{$transaksi->status_transaksi}}</span>  </h4>
                             </div>
                             <div class="col-12 col-sm-4 text-center text-sm-right">
+                                @if($transaksi->tanggal_kirim != null)
+                                    <h3 class="mt-4">  Dikirim Tanggal : <strong>  {{ \Carbon\Carbon::parse($transaksi->tanggal_kirim)->format('d M Y') }} </strong> </h3>
+                                @else
+                                    <h3 class="mt-4"> Dikirim Tanggal :  <strong> menunggu informasi </strong> </h3>
+                                @endif
                             </div>
                         </div>
 
@@ -66,9 +71,42 @@
                                                 </div>
                                             @endforeach
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-lg-12  col-sm-12 col-xs-12 shop-content-right">
+                    <div class="right-product-box">
+                        <div class="product-item-filter row">
+                            <div class="col-12 col-sm-8 text-left text-sm-left">
+                                <h2 class="mt-4">Bukti Pembayaran</h2>
+                            </div>
+                            <div class="col-12 col-sm-4 text-center text-sm-right">
+                            </div>
+                        </div>
+
+                        <div class="product-categorie-box">
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane fade show active" id="list-view">
+                                    <div class="list-view-box">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-md-6 col-lg-9 col-xl-9">
+                                                <div class="why-text full-width">
+                                                    @if($transaksi->bukti_bayar)
+                                                        <img class="img-fluid" width="250" src="{{ asset('img/bukti_bayar/'.$transaksi->bukti_bayar) }}" alt="" />
+                                                    @else
+                                                        <img class="img-fluid" width="250" src="{{ asset('img/pegawai/padrao.png') }}" alt="" />
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row mt-3">
                                             <div class="col-md-12">
-                                                <a class="btn hvr-hover text-white" href="#">Kirim Bukti Bayar</a>
+                                                <a class="btn hvr-hover text-white" href="{{route('bukti-bayar',$transaksi->id_transaksi)}}">Kirim Bukti Bayar</a>
                                             </div>
                                         </div>
                                     </div>

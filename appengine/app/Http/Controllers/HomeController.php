@@ -129,6 +129,45 @@ class HomeController extends Controller
         return view('front.akun',compact('transaksi'));
     }
 
+    public function buktiBayar($id_transaksi){
+        return view('front.buktibayar',compact('id_transaksi'));
+    }
+
+    public function buktiBayarStore(Request $request){
+
+        $requestData = $request->all();
+        $id_transaksi = $request->input('id_transaksi');
+        $data = Transaksi::findOrFail($id_transaksi);
+        $photo = "";
+
+        if ($request->hasFile('foto')) {
+            $image = $request->file('foto');
+            $photo = round(microtime(true) * 1000) . '.' . $image->getClientOriginalExtension();
+            $image->move('img/bukti_bayar/', $photo);
+        }
+        $requestData['bukti_bayar'] = $photo;
+        unset($requestData['id_transaksi']);
+
+        $update = $data->update($requestData);
+
+        if ($update) {
+            return redirect(route('detail-transaksi',$id_transaksi))
+                ->with('pesan_status', [
+                    'tipe' => 'info',
+                    'desc' => 'Data Berhasil diupdate',
+                    'judul' => 'Data Bukti Bayar'
+                ]);
+        } else {
+            Redirect::back()->with('pesan_status', [
+                'tipe' => 'error',
+                'desc' => 'Server Error',
+                'judul' => 'Terdapat kesalahan pada server.'
+            ]);
+        }
+
+
+    }
+
     public function detailTransaksi($id_transaksi){
         $detail_trans = DetailTransaksi::join('produk','produk.id_produk','=','detail_transaksi.id_produk')
             ->where('id_transaksi',$id_transaksi)
