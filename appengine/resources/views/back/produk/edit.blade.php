@@ -114,6 +114,18 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-12 col-md-4 col-form-label">Diskon Harga Produk (%)</label>
+                            <div class="col-sm-12 col-md-8">
+                                {!! Form::number('diskon', null, ['class' => 'form-control', $errors->has('diskon') ? 'form-control-danger' : '', 'placeholder' => 'diskon dalam %'
+                                , 'required' => 'required']) !!}
+                                @error('diskon')
+                                <div class="col-form-label">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-12 col-md-4 col-form-label">Deskripsi Produk</label>
@@ -133,6 +145,18 @@
                                 {!! Form::text('cara_penyimpanan', null, ['class' => 'form-control', $errors->has('cara_penyimpanan') ? 'form-control-danger' : '', 'placeholder' => 'Contoh : Dalam Kulkas dll.'
                                 , 'required' => 'required']) !!}
                                 @error('cara_penyimpanan')
+                                <div class="col-form-label">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-12 col-md-4 col-form-label">Manfaat Produk</label>
+                            <div class="col-sm-12 col-md-8">
+                                {!! Form::textarea('manfaat_produk', null, ['class' => 'form-control', $errors->has('manfaat_produk') ? 'form-control-danger' : '', 'placeholder' => 'Manfaat produk']) !!}
+                                @error('manfaat_produk')
                                 <div class="col-form-label">
                                     <strong>{{ $message }}</strong>
                                 </div>

@@ -34,6 +34,7 @@
                                 <th>Gambar</th>
                                 <th>Nama Produk</th>
                                 <th>Harga</th>
+                                <th>Diskon</th>
                                 <th>Jumlah</th>
                                 <th>Subtotal</th>
                                 <th>Action</th>
@@ -42,7 +43,10 @@
                             <tbody>
                                 @foreach($keranjang as $val)
                                     @php
-                                        $subtotal = $val->jumlah_beli * $val->harga;
+                                        $potongan = ($val->diskon/100) * $val->harga;
+                                        $harga_setelah_diskon = $val->harga - $potongan;
+
+                                        $subtotal = $val->jumlah_beli * $harga_setelah_diskon;
                                         $total_semua = $total_semua + $subtotal;
                                     @endphp
                                     <tr>
@@ -58,6 +62,9 @@
                                         </td>
                                         <td class="price-pr">
                                             <p>Rp. {{number_format($val->harga,0,',','.')}}</p>
+                                        </td>
+                                        <td class="quantity-box">
+                                            {{$val->diskon}} %
                                         </td>
                                         <td class="quantity-box">
                                             {{$val->jumlah_beli}}

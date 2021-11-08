@@ -28,7 +28,7 @@
     <li class="{{ Nav::isResource('transaksi', NULL, 'active') }}">
         <a href="{{ route('transaksi.index') }}" title="Setting" data-filter-tags="transaksi">
             <i class="fal fa-money-bill text-white"></i>
-            <span class="nav-link-text text-white" data-i18n="nav.transaksi">Transaksi</span>
+            <span class="nav-link-text text-white" data-i18n="nav.transaksi">Transaksi Penjualan</span>
         </a>
     </li>
     <li class="{{ Nav::isResource('setting', NULL, 'active') }}">

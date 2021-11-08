@@ -118,8 +118,8 @@ class SupplierController extends Controller
             $image = $request->file('foto');
             $photo = round(microtime(true) * 1000) . '.' . $image->getClientOriginalExtension();
             $image->move('img/supplier/', $photo);
+            $requestData['foto_supplier'] = $photo;
         }
-        $requestData['foto_supplier'] = $photo;
 
         $update = $data->update($requestData);
 

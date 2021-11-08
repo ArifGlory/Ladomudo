@@ -32,7 +32,7 @@ class KeranjangController extends Controller
     public function index(Request $request)
     {
         //
-        $keranjang = Keranjang::select('keranjang.*','produk.nama_produk','produk.foto_produk','produk.harga')
+        $keranjang = Keranjang::select('keranjang.*','produk.nama_produk','produk.foto_produk','produk.harga','produk.diskon')
             ->join('users','keranjang.id_user','=','users.id')
             ->join('produk','keranjang.id_produk','=','produk.id_produk')
             ->where('keranjang.id_user',Auth::user()->id)
@@ -91,7 +91,7 @@ class KeranjangController extends Controller
     }
 
     public function checkout(Request $request){
-        $keranjang = Keranjang::select('keranjang.*','produk.nama_produk','produk.foto_produk','produk.harga','produk.id_produk')
+        $keranjang = Keranjang::select('keranjang.*','produk.nama_produk','produk.foto_produk','produk.harga','produk.id_produk','produk.diskon')
             ->join('users','keranjang.id_user','=','users.id')
             ->join('produk','keranjang.id_produk','=','produk.id_produk')
             ->where('keranjang.id_user',Auth::user()->id)
@@ -102,7 +102,10 @@ class KeranjangController extends Controller
         if (count($keranjang) > 0){
             $total_semua = 0;
             foreach ($keranjang as $val){
-                $subtotal = $val->jumlah_beli * $val->harga;
+                $potongan = ($val->diskon/100) * $val->harga;
+                $harga_setelah_diskon = $val->harga - $potongan;
+
+                $subtotal = $val->jumlah_beli * $harga_setelah_diskon;
                 $total_semua = $total_semua + $subtotal;
             }
 

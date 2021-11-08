@@ -61,10 +61,14 @@
                         <div class="single-product-details">
                             <h2> {{$data->nama_produk}} </h2>
                             <h4 class="mt-0"> Kategori  {{$data->nama_kategori}} </h4>
-                            <h5 class="mt-4">  Rp . {{number_format($data->harga,0,',','.')}} /Kg</h5>
+                            <h5 class="mt-4"> <del> Rp . {{number_format($data->harga,0,',','.')}} /Kg </del> &nbsp; Rp . {{number_format($harga_setelah_diskon,0,',','.')}} </h5>
                             <p class="available-stock"><span> Stok Tersisa {{$data->stok}} available</span><p>
                             <h4>Deskripsi:</h4>
-                            <p> {{$data->deskripsi_produk}} </p>
+                            <p> {{$data->deskripsi_produk}}
+                            </p>
+                            <h5 class="text-black-50">Manfaat : </h5>
+                            <p> {{$data->manfaat_produk}}
+                            </p>
                             <ul>
                                 <input name="id_produk" type="hidden" value="{{$data->id_produk}}">
                                 <li>

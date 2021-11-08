@@ -217,7 +217,10 @@ class HomeController extends Controller
             ->where('produk.id_produk',$id)
             ->first();
 
-        return view('front.detailproduk',compact('data'));
+        $potongan = ($data->diskon/100) * $data->harga;
+        $harga_setelah_diskon = $data->harga - $potongan;
+
+        return view('front.detailproduk',compact('data','harga_setelah_diskon'));
     }
 
 

@@ -164,9 +164,9 @@ class ProdukController extends Controller
             $image = $request->file('foto');
             $photo = round(microtime(true) * 1000) . '.' . $image->getClientOriginalExtension();
             $image->move('img/produk/', $photo);
+            $requestData['foto_produk'] = $photo;
         }
 
-        $requestData['foto_produk'] = $photo;
         $update = $data->update($requestData);
 
         if ($update) {

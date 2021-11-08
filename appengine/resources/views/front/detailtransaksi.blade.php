@@ -47,15 +47,22 @@
                                         <div class="row">
                                             @foreach($detail_trans as $val)
                                                 @php
-                                                    $subtotal = $val->jumlah_beli * $val->harga;
+                                                    $potongan = ($val->diskon/100) * $val->harga;
+                                                    $harga_setelah_diskon = $val->harga - $potongan;
+
+                                                    //$subtotal = $val->jumlah_beli * $val->harga;
+                                                    $subtotal = $val->jumlah_beli * $harga_setelah_diskon;
                                                 @endphp
                                                 <div class="col-sm-6 col-md-6 col-lg-9 col-xl-9">
                                                     <div class="why-text full-width">
                                                         <h4>{{$val->nama_produk}}</h4>
-                                                        <h5> {{$val->jumlah_beli}} pcs @ Rp. {{ number_format($subtotal,0,',','.')}}</h5>
+                                                        <h5> {{$val->jumlah_beli}} Kg @ Rp. {{ number_format($subtotal,0,',','.')}}</h5>
                                                         <br>
                                                         <br>
-                                                        <p>{{$val->deskripsi_produk}} </p>
+                                                        <p>{{$val->deskripsi_produk}}
+                                                        <br>
+                                                            {{$val->manfaat_produk}}
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 col-md-6 col-lg-3 col-xl-3">

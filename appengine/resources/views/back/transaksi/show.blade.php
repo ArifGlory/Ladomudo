@@ -110,14 +110,19 @@
                                     <td width="2%">No</td>
                                     <td>Nama Produk</td>
                                     <td>Harga</td>
-                                    <td>Jumlah</td>
+                                    <td>Diskon</td>
+                                    <td>Jumlah beli</td>
                                     <td>Subtotal</td>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($detail_trans as $val)
                                     @php
-                                        $subtotal = $val->harga * $val->jumlah_beli;
+                                        $potongan = ($val->diskon/100) * $val->harga;
+                                        $harga_setelah_diskon = $val->harga - $potongan;
+
+                                        $subtotal = $val->jumlah_beli * $harga_setelah_diskon;
+                                        //$subtotal = $val->harga * $val->jumlah_beli;
                                     @endphp
                                     <tr>
                                         <td>{{$no++}}</td>
@@ -127,6 +132,7 @@
                                             </a>
                                         </td>
                                         <td>Rp. {{ number_format($val->harga,0,',','.')}} </td>
+                                        <td>{{$val->diskon}} % </td>
                                         <td>{{$val->jumlah_beli}}</td>
                                         <td>Rp. {{ number_format($subtotal,0,',','.')}}</td>
                                     </tr>

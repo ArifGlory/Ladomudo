@@ -22,7 +22,9 @@ class Produk extends Model
         'foto_produk',
         'harga',
         'stok',
+        'diskon',
         'deskripsi_produk',
+        'manfaat_produk',
         'cara_penyimpanan',
         'created_at',
         'updated_at'
