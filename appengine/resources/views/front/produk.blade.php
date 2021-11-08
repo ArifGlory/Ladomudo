@@ -36,30 +36,35 @@
                                     <div class="row">
                                         @foreach($produk as $val)
                                             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
-                                            <div class="products-single fix">
-                                                <div class="box-img-hover">
-                                                    <div class="type-lb">
-                                                       {{-- <p class="sale">Sale</p>--}}
+                                                <a href="{{url('shop/shop-detail/'.$val->id_produk)}}">
+                                                    <div class="products-single fix">
+                                                    <div class="box-img-hover">
+                                                        <div class="type-lb">
+                                                           {{-- <p class="sale">Sale</p>--}}
+                                                        </div>
+                                                        @if($val->foto_produk)
+                                                            <img class="img-fluid" src="{{ asset('img/produk/'.$val->foto_produk) }}" alt="" />
+                                                        @else
+                                                            <img class="img-fluid" src="{{ asset('img/pegawai/padrao.png') }}" alt="" />
+                                                        @endif
+                                                        <div class="">
+                                                            <a href="{{url('shop/shop-detail/'.$val->id_produk)}}">
+                                                                <ul>
+
+<!--                                                                    <li><a href="{{--{{url('shop/shop-detail/'.$val->id_produk)}}--}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>-->
+                                                                    {{--<li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
+                                                                    <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>--}}
+                                                                </ul>
+                                                            </a>
+                                                        </div>
                                                     </div>
-                                                    @if($val->foto_produk)
-                                                        <img class="img-fluid" src="{{ asset('img/produk/'.$val->foto_produk) }}" alt="" />
-                                                    @else
-                                                        <img class="img-fluid" src="{{ asset('img/pegawai/padrao.png') }}" alt="" />
-                                                    @endif
-                                                    <div class="mask-icon">
-                                                        <ul>
-                                                            <li><a href="{{url('shop/shop-detail/'.$val->id_produk)}}" data-toggle="tooltip" data-placement="right" title="View"><i class="fas fa-eye"></i></a></li>
-                                                            {{--<li><a href="#" data-toggle="tooltip" data-placement="right" title="Compare"><i class="fas fa-sync-alt"></i></a></li>
-                                                            <li><a href="#" data-toggle="tooltip" data-placement="right" title="Add to Wishlist"><i class="far fa-heart"></i></a></li>--}}
-                                                        </ul>
-                                                        {{--<a class="cart" href="#">Tambahkan ke Keranjang</a>--}}
+                                                    <div class="why-text">
+                                                        <h4> {{$val->nama_produk}}</h4>
+                                                        <h5> Rp. {{number_format($val->harga,0,',','.')}} /Kg</h5>
                                                     </div>
-                                                </div>
-                                                <div class="why-text">
-                                                    <h4> {{$val->nama_produk}}</h4>
-                                                    <h5> Rp. {{number_format($val->harga,0,',','.')}}</h5>
-                                                </div>
+
                                             </div>
+                                                </a>
                                         </div>
                                         @endforeach
                                     </div>

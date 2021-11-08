@@ -131,6 +131,14 @@ class HomeController extends Controller
         return view('front.akun',compact('transaksi'));
     }
 
+    public function transaksi(Request $request){
+        $transaksi = Transaksi::where('id_user',Auth::user()->id)
+            ->orderBy('created_at',"DESC")
+            ->get();
+
+        return view('front.transaksi',compact('transaksi'));
+    }
+
     public function buktiBayar($id_transaksi){
         return view('front.buktibayar',compact('id_transaksi'));
     }

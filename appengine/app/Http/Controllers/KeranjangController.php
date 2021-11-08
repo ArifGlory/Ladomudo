@@ -96,47 +96,60 @@ class KeranjangController extends Controller
             ->join('produk','keranjang.id_produk','=','produk.id_produk')
             ->where('keranjang.id_user',Auth::user()->id)
             ->get();
-        $total_semua = 0;
-        foreach ($keranjang as $val){
-            $subtotal = $val->jumlah_beli * $val->harga;
-            $total_semua = $total_semua + $subtotal;
-        }
 
-        $save_trans = Transaksi::create([
-            'id_user' => Auth::user()->id,
-            'total_harga' => $total_semua
-        ]);
-        if ($save_trans){
-            $id_transaksi = $save_trans->id_transaksi;
 
-            foreach ($keranjang as $value){
 
-                $save_dt_trans = DetailTransaksi::create([
-                    'id_user' => Auth::user()->id,
-                    'id_transaksi' => $id_transaksi,
-                    'id_produk' => $value->id_produk,
-                    'jumlah_beli' => $value->jumlah_beli,
-                ]);
-
-                //hapus dari cart
-                $info = Keranjang::find($value->id_keranjang);
-                $delete = $info->forceDelete();
+        if (count($keranjang) > 0){
+            $total_semua = 0;
+            foreach ($keranjang as $val){
+                $subtotal = $val->jumlah_beli * $val->harga;
+                $total_semua = $total_semua + $subtotal;
             }
 
+            $save_trans = Transaksi::create([
+                'id_user' => Auth::user()->id,
+                'total_harga' => $total_semua
+            ]);
+            if ($save_trans){
+                $id_transaksi = $save_trans->id_transaksi;
+
+                foreach ($keranjang as $value){
+
+                    $save_dt_trans = DetailTransaksi::create([
+                        'id_user' => Auth::user()->id,
+                        'id_transaksi' => $id_transaksi,
+                        'id_produk' => $value->id_produk,
+                        'jumlah_beli' => $value->jumlah_beli,
+                    ]);
+
+                    //hapus dari cart
+                    $info = Keranjang::find($value->id_keranjang);
+                    $delete = $info->forceDelete();
+                }
+
+                return redirect(route('keranjang.index'))
+                    ->with('pesan_status',[
+                        'tipe' => 'info',
+                        'desc' => 'Checkout Berhasil ! , Jangan lupa mengirim bukti bayar anda',
+                        'judul' => 'Data checkout'
+                    ]);
+
+            }else{
+                Redirect::back()->with('pesan_status', [
+                    'tipe' => 'danger',
+                    'desc' => 'Server Error',
+                    'judul' => 'Terdapat kesalahan pada server.'
+                ]);
+            }
+        }else{
             return redirect(route('keranjang.index'))
                 ->with('pesan_status',[
-                    'tipe' => 'info',
-                    'desc' => 'Checkout Berhasil ! , Jangan lupa mengirim bukti bayar anda',
-                    'judul' => 'Data checkout'
+                    'tipe' => 'danger',
+                    'desc' => 'Checkout gagal,Harus isi keranjang anda',
+                    'judul' => 'Keranjang Kosong !'
                 ]);
-
-        }else{
-            Redirect::back()->with('pesan_status', [
-                'tipe' => 'danger',
-                'desc' => 'Server Error',
-                'judul' => 'Terdapat kesalahan pada server.'
-            ]);
         }
+
     }
 
     public function update(Request $request, $id)

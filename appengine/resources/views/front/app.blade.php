@@ -95,10 +95,11 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
-                    <li class="nav-item active"><a class="nav-link" href="{{url('/')}}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url('/tentang')}}">Tentang Kami</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url('/shop')}}">Produk</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{url('/keranjang')}}">Keranjang</a></li>
+                    <li class="nav-item {{ Nav::isRoute('home', 'active') }}"><a class="nav-link" href="{{url('/')}}">Home</a></li>
+                    <li class="nav-item {{ Nav::isRoute('tentang', 'active') }}"><a class="nav-link" href="{{url('/tentang')}}">Tentang Kami</a></li>
+                    <li class="nav-item {{ Nav::isRoute('shop', 'active') }}"><a class="nav-link" href="{{url('/shop')}}">Produk</a></li>
+                    <li class="nav-item {{ Nav::isRoute('keranjang', 'active') }}"><a class="nav-link" href="{{url('/keranjang')}}">Keranjang</a></li>
+                    <li class="nav-item {{ Nav::isRoute('transaksi-saya', 'active') }}"><a class="nav-link" href="{{url('/transaksi-saya')}}">Transaksi</a></li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

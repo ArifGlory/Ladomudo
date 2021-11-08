@@ -1,5 +1,5 @@
 @extends('front.app')
-@section('title', 'Akun Saya')
+@section('title', 'Transaksi Saya')
 
 @section('content')
     <!-- Start All Title Box -->
@@ -7,10 +7,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>My Account</h2>
+                    <h2>Transaksi</h2>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{{url('/')}}">Home</a></li>
-                        <li class="breadcrumb-item active">My Account</li>
+                        <li class="breadcrumb-item active">Transaksi</li>
                     </ul>
                 </div>
             </div>

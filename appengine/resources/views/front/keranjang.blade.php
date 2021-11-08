@@ -111,7 +111,11 @@
                         </div>
                         <hr> </div>
                 </div>
-                <div class="col-12 d-flex shopping-box"><a href="{{route('keranjang.checkout')}}" class="ml-auto btn hvr-hover">Checkout</a> </div>
+                @if(count($keranjang) > 0)
+                    <div class="col-12 d-flex shopping-box"><a href="{{route('keranjang.checkout')}}" class="ml-auto btn hvr-hover">Checkout</a> </div>
+                @else
+                    <div class="col-12 d-flex shopping-box"><a href="#" class="ml-auto btn hvr-hover disabled">Keranjang kosong</a> </div>
+                @endif
             </div>
 
         </div>

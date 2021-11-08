@@ -27,7 +27,7 @@
                     <div class="right-product-box">
                         <div class="product-item-filter row">
                             <div class="col-12 col-sm-8 text-left text-sm-left">
-                                <h2 class="mt-4">Detail Transaksi Tanggal {{ \Carbon\Carbon::parse($transaksi->created_at)->format('d M Y') }}</h2>
+                                <h2 class="mt-4">Detail Transaksi Tanggal {{ \Carbon\Carbon::parse($transaksi->created_at)->format('d M Y | H:i') }}</h2>
                                 <h3> <strong> Total Pembayaran Rp. {{ number_format($transaksi->total_harga,0,',','.')}} </strong></h3>
                                 <h4> <span class="badge badge-primary p-2">Status Transaksi : {{$transaksi->status_transaksi}}</span>  </h4>
                             </div>
