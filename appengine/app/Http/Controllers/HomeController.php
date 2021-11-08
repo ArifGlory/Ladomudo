@@ -24,6 +24,7 @@ use App\Models\Santri;
 use App\Models\Setting;
 use App\Models\Supplier;
 use App\Models\Transaksi;
+use App\Models\UlasanRating;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -124,11 +125,10 @@ class HomeController extends Controller
     }
 
     public function userAccount(Request $request){
-        $transaksi = Transaksi::where('id_user',Auth::user()->id)
-            ->orderBy('created_at',"DESC")
-            ->get();
+        $data = User::where('id',Auth::user()->id)
+            ->first();
 
-        return view('front.akun',compact('transaksi'));
+        return view('front.akun',compact('data'));
     }
 
     public function transaksi(Request $request){
@@ -217,10 +217,63 @@ class HomeController extends Controller
             ->where('produk.id_produk',$id)
             ->first();
 
+        $ulasan = UlasanRating::select('*')
+            ->join('users','users.id','=','ulasan_rating.id_user')
+            ->where('ulasan_rating.id_produk',$id)
+            ->get();
+
+        $rating = 0;
+        foreach ($ulasan as $val){
+            $rating = $rating + $val->rating;
+        }
+        if (count($ulasan) > 0){
+            $rating = $rating / count($ulasan);
+        }
+
         $potongan = ($data->diskon/100) * $data->harga;
         $harga_setelah_diskon = $data->harga - $potongan;
 
-        return view('front.detailproduk',compact('data','harga_setelah_diskon'));
+        return view('front.detailproduk',compact('data','harga_setelah_diskon','ulasan','rating'));
+    }
+
+    public  function addUlasan($id_produk){
+
+        $data = Produk::select('*')
+            ->where('produk.id_produk',$id_produk)
+            ->first();
+
+        return view('front.addulasan',compact('data'));
+    }
+
+    public function storeUlasan(Request $request){
+
+        $requestData = $request->all();
+        $id_produk = $request->input('id_produk');
+
+        $save = UlasanRating::create([
+            'id_produk' => $request->input('id_produk'),
+            'id_user' => Auth::user()->id,
+            'ulasan' => $request->input('ulasan'),
+            'rating' => $request->input('rating')
+        ]);
+
+
+        if ($save) {
+            return redirect(route('shop-detail',$id_produk))
+                ->with('pesan_status', [
+                    'tipe' => 'info',
+                    'desc' => 'Data Ulasan Ditambahkan',
+                    'judul' => 'Ulasan berhasil'
+                ]);
+        } else {
+            Redirect::back()->with('pesan_status', [
+                'tipe' => 'error',
+                'desc' => 'Server Error',
+                'judul' => 'Terdapat kesalahan pada server.'
+            ]);
+        }
+
+
     }
 
 
