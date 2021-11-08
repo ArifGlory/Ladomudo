@@ -87,23 +87,25 @@
                 @foreach($produk as $val)
                     <div class="col-md-6 col-lg-4 col-xl-4">
                         <div class="blog-box">
-                            <div class="blog-img">
-                                @if($val->foto_produk)
-                                    <img class="img-fluid" src="{{ asset('img/produk/'.$val->foto_produk) }}" alt="" />
-                                @else
-                                    <img class="img-fluid" src="{{ asset('img/pegawai/padrao.png') }}" alt="" />
-                                @endif
-                            </div>
-                            <div class="blog-content">
-                                <div class="title-blog">
-                                    <h3> {{$val->nama_produk}} </h3>
-                                    <p> {{$val->deskripsi_produk}} </p>
+                            <a href="{{route('shop-detail',$val->id_produk)}}">
+                                <div class="blog-img">
+                                    @if($val->foto_produk)
+                                        <img class="img-fluid" src="{{ asset('img/produk/'.$val->foto_produk) }}" alt="" />
+                                    @else
+                                        <img class="img-fluid" src="{{ asset('img/pegawai/padrao.png') }}" alt="" />
+                                    @endif
                                 </div>
-                                <ul class="option-blog">
-                                    {{-- <li><a href="#"><i class="far fa-heart"></i></a></li>--}}
-                                    {{-- <li><a href="#"><i class="far fa-comments"></i></a></li>--}}
-                                </ul>
-                            </div>
+                                <div class="blog-content">
+                                    <div class="title-blog">
+                                        <h3> {{$val->nama_produk}} </h3>
+                                        <p> {{$val->deskripsi_produk}} </p>
+                                    </div>
+                                    <ul class="option-blog">
+                                        {{-- <li><a href="#"><i class="far fa-heart"></i></a></li>--}}
+                                        {{-- <li><a href="#"><i class="far fa-comments"></i></a></li>--}}
+                                    </ul>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 @endforeach
