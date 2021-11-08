@@ -19,6 +19,7 @@ class Supplier extends Model
         'nama_supplier',
         'alamat_supplier',
         'phone_supplier',
+        'foto_supplier',
         'created_at',
         'updated_at'
     ];

@@ -50,8 +50,14 @@ class ProdukController extends Controller
                 return Datatables::of($data)
                     ->addColumn('harga', function ($item) {
 
-                        $harga =  "Rp. ".number_format($item->harga,0,',','.');
+                        $harga =  "Rp. ".number_format($item->harga,0,',','.') . " /Kg";
                         return $harga;
+
+                    })
+                    ->editColumn('stok', function ($item) {
+
+                        $stok =  $item->stok . " Kg";
+                        return $stok;
 
                     })
                     ->addColumn('_action', function ($item) {/*
@@ -90,22 +96,6 @@ class ProdukController extends Controller
 
                 $harga =  "Rp. ".number_format($item->harga,0,',','.');
                 return $harga;
-
-            })
-            ->addColumn('_action', function ($item) {/*
-                         /*
-                         * L = Lihat => $lihat
-                         * C = Cetak => $cetak
-                         * E = Edit => $edit
-                         * H = Hapus => $hapus
-                         * R = Restore = $restore
-                         * M = Modal Dialog*/
-                $role = Auth::user()->jenis_user;
-                $lihat = route('produk.show', $item->id_produk);
-                $edit = route('produk.edit', $item->id_produk);
-                $hapus = route('produk.destroy', $item->id_produk);
-                $button = 'LEHRM';
-                return view('datatable._action_button', compact('item', 'button','lihat','edit', 'hapus'));
 
             })
             ->escapeColumns([])

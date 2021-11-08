@@ -69,11 +69,11 @@
                                 </div>
                                 <div class="form-group mt-3">
                                     <label class="form-label">Harga</label>
-                                    <h5><h5>Rp. {{ number_format($data->harga,0,',','.')}}</h5></h5>
+                                    <h5><h5>Rp. {{ number_format($data->harga,0,',','.')}} /Kg</h5></h5>
                                 </div>
                                 <div class="form-group mt-3">
                                     <label class="form-label">Stok</label>
-                                    <h5>{{$data->stok}}</h5>
+                                    <h5>{{$data->stok}} Kg</h5>
                                 </div>
                             </div>
                         </div>

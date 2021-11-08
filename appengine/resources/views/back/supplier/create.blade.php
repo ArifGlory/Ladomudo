@@ -77,6 +77,18 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-12 col-md-4 col-form-label">Foto Supplier</label>
+                            <div class="col-sm-12 col-md-8">
+                                <input accept="image/*" required id="foto" class="form-control @error('foto') is-invalid @enderror" type="file" name="foto">
+                                @error('foto')
+                                <div class="col-form-label">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+
                         <div class="text-left">
                             <div class="panel-content text-right py-2 rounded-bottom border-faded border-left-0 border-right-0 border-bottom-0 text-muted p-4">
                                 <button onclick="saveData()" class="btn btn-info btn-sm waves-effect text-left"><i

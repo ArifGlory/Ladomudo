@@ -76,7 +76,6 @@
                                 <td>Harga</td>
                                 <td>Stok</td>
                                 <td>Deskripsi</td>
-                                <td width="20%">Action</td>
                             </thead>
                         </table>
                         <!-- datatable end -->
@@ -134,14 +133,11 @@
                     {
                         data: 'deskripsi_produk', name: 'deskripsi_produk', orderable: true,
                     },
-                    {
-                        data: '_action', name: '_action'
-                    }
                 ],
                 columnDefs: [
                     {
                         className: 'text-center',
-                        targets: [0, 1 , 5]
+                        targets: [0, 1 ]
                     }
                 ],
             });
