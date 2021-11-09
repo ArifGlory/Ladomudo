@@ -114,7 +114,7 @@ class TransaksiController extends Controller
     public function show($id){
         $data = Transaksi::select('transaksi.*','users.name','users.alamat','users.phone')
             ->join('users','users.id','=','transaksi.id_user')
-            ->orderBy('id_transaksi', 'DESC')
+            ->where('id_transaksi', $id)
             ->first();
 
         $detail_trans = DetailTransaksi::join('produk','produk.id_produk','=','detail_transaksi.id_produk')
