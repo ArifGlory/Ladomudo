@@ -89,11 +89,24 @@
                         </div>
 
                         <div class="form-group row">
-                            <label class="col-12 col-md-4 col-form-label">Harga Produk</label>
+                            <label class="col-12 col-md-4 col-form-label">Harga Jual Produk</label>
                             <div class="col-sm-12 col-md-8">
                                 {!! Form::number('harga', null, ['class' => 'form-control', $errors->has('harga') ? 'form-control-danger' : '', 'placeholder' => 'harga'
                                 , 'required' => 'required']) !!}
                                 @error('harga')
+                                <div class="col-form-label">
+                                    <strong>{{ $message }}</strong>
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-12 col-md-4 col-form-label">Harga Beli Produk</label>
+                            <div class="col-sm-12 col-md-8">
+                                {!! Form::number('harga_beli', null, ['class' => 'form-control', $errors->has('harga_beli') ? 'form-control-danger' : '', 'placeholder' => 'harga pembelian'
+                                , 'required' => 'required']) !!}
+                                @error('harga_beli')
                                 <div class="col-form-label">
                                     <strong>{{ $message }}</strong>
                                 </div>

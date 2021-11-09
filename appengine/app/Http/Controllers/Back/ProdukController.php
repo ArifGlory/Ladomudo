@@ -131,6 +131,7 @@ class ProdukController extends Controller
             'id_kategori' => $request->input('id_kategori'),
             'nama_produk' => $request->input('nama_produk'),
             'harga' => $request->input('harga'),
+            'harga_beli' => $request->input('harga_beli'),
             'stok' => $request->input('stok'),
             'deskripsi_produk' => $request->input('deskripsi_produk'),
             'cara_penyimpanan' => $request->input('cara_penyimpanan'),

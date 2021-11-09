@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Data Transaksi')
+@section('title', 'Data Pembelian')
 
 @push('css')
     <link rel="stylesheet" media="screen, print" href="{{ asset('back-end/css/datagrid/datatables/datatables.bundle.css') }}">
@@ -8,18 +8,19 @@
 @section('breadcrumb')
     <ol class="breadcrumb page-breadcrumb">
         <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><strong>{{  getSettingData('web_name')->value ?? env('APP_NAME') }}</strong> WebApp</a></li>
-        <li class="breadcrumb-item active">Transaksi</li>
+        <li class="breadcrumb-item active">Pembelian</li>
         <li class="position-absolute pos-top pos-right d-none d-sm-block"><span class="js-get-date"></span></li>
     </ol>
     <div class="subheader">
         <h1 class="subheader-title">
-            <i class='subheader-icon fal fa-list'></i> Transaksi Penjualan
+            <i class='subheader-icon fal fa-list'></i>Transaksi Pembelian
             <small>
-                Berisi Data Transaksi
+                Berisi Data Transaksi Pembelian
             </small>
         </h1>
         <div class="btn-group btn-group-sm text-center float-right">
-            <a href="{{ url('/transaksi/laporan') }}" class="btn btn-warning btn-mini waves-effect waves-light"><span class="fal fa-print"></span> Cetak Laporan</a>
+            <a href="{{ url('/pembelian/laporan') }}" class="btn btn-warning btn-mini waves-effect waves-light"><span class="fal fa-print"></span> Cetak Laporan</a>
+            <a href="{{ url('/pembelian/create') }}" class="btn btn-primary btn-mini waves-effect waves-light"><span class="fal fa-plus"></span> Pembelian Baru</a>
         </div>
     </div>
 @endsection
@@ -29,7 +30,7 @@
             <div id="panel-1" class="panel">
                 <div class="panel-hdr">
                     <h2>
-                        <strong id="title-table">Transaksi</strong> <span class="fw-300"><i>Table</i></span>
+                        <strong id="title-table">Pembelian</strong> <span class="fw-300"><i>Table</i></span>
                     </h2>
                     <div class="panel-toolbar">
                         <button class="btn btn-panel" data-action="panel-collapse" data-toggle="tooltip" data-offset="0,10" data-original-title="Collapse"></button>
@@ -44,7 +45,6 @@
                             <thead>
                             <tr>
                                 <td width="2%">No</td>
-                                <td>Nama Pelanggan</td>
                                 <td>Total Bayar</td>
                                 <td>Tanggal</td>
                                 <td width="20%">Action</td>
@@ -77,15 +77,12 @@
             processing: true,
             serverSide: true,
             'ajax': {
-                'url': '{{ route('transaksi.data') }}',
+                'url': '{{ route('pembelian.data') }}',
                 'type': 'GET',
             },
             columns: [
                 {
                     data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: true, searchable: false
-                },
-                {
-                    data: 'name', name: 'name', orderable: true,
                 },
                 {
                     data: 'total_harga', name: 'total_harga', orderable: true,
@@ -100,7 +97,7 @@
             columnDefs: [
                 {
                     className: 'text-center',
-                    targets: [0, 1 , 4]
+                    targets: [0, 1 , 3]
                 }
             ],
         });

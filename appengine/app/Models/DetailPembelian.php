@@ -5,33 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Produk extends Model
+class DetailPembelian extends Model
 {
 
     use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
+        'id_detail_pembelian',
+        'id_pembelian',
         'id_produk',
-        'id_supplier',
-        'id_kategori',
-        'nama_produk',
-        'foto_produk',
-        'harga',
-        'harga_beli',
-        'stok',
-        'diskon',
-        'deskripsi_produk',
-        'manfaat_produk',
-        'cara_penyimpanan',
+        'jumlah_beli',
         'created_at',
         'updated_at'
     ];
-    protected $primaryKey = 'id_produk';
+    protected $primaryKey = 'id_detail_transaksi';
     protected $dates = ['deleted_at'];
 
-    protected $table = 'produk';
+    protected $table = 'detail_pembelian';
 }

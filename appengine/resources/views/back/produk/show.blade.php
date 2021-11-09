@@ -68,8 +68,12 @@
                                     <h5>{{$data->nama_supplier}}</h5>
                                 </div>
                                 <div class="form-group mt-3">
-                                    <label class="form-label">Harga</label>
+                                    <label class="form-label">Harga Jual</label>
                                     <h5><h5>Rp. {{ number_format($data->harga,0,',','.')}} /Kg</h5></h5>
+                                </div>
+                                <div class="form-group mt-3">
+                                    <label class="form-label">Harga Pembelian</label>
+                                    <h5><h5>Rp. {{ number_format($data->harga_beli,0,',','.')}} /Kg</h5></h5>
                                 </div>
                                 <div class="form-group mt-3">
                                     <label class="form-label">Stok</label>

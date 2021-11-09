@@ -31,6 +31,12 @@
             <span class="nav-link-text text-white" data-i18n="nav.transaksi">Transaksi Penjualan</span>
         </a>
     </li>
+    <li class="{{ Nav::isResource('pembelian', NULL, 'active') }}">
+        <a href="{{ route('pembelian.index') }}" title="Setting" data-filter-tags="pembelian">
+            <i class="fal fa-money-bill-alt text-white"></i>
+            <span class="nav-link-text text-white" data-i18n="nav.pembelian">Transaksi Pembelian</span>
+        </a>
+    </li>
     <li class="{{ Nav::isResource('setting', NULL, 'active') }}">
         <a href="{{ route('setting.index') }}" title="Setting" data-filter-tags="setting">
             <i class="fal fa-cog text-white"></i>

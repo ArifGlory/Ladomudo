@@ -112,6 +112,18 @@ Route::group([
 });
 Route::resource('transaksi', 'Back\TransaksiController')->middleware('auth');
 
+Route::get('/pembelian', 'Back\PembelianController@index')->middleware('auth')->name('pembelian');
+Route::group([
+    'prefix' => 'pembelian',
+    'middleware' => 'auth'
+], function () {
+    Route::get('laporan', [\App\Http\Controllers\Back\PembelianController::class, 'cetakLaporan'])->name('pembelian.laporan');
+    Route::get('data', [\App\Http\Controllers\Back\PembelianController::class, 'data'])->name('pembelian.data');
+    Route::get('trash', [\App\Http\Controllers\Back\PembelianController::class, 'trash'])->name('pembelian.trash');
+    Route::post('restore/{pembelian}', [\App\Http\Controllers\Back\PembelianController::class, 'restore'])->name('pembelian.restore');
+});
+Route::resource('pembelian', 'Back\PembelianController')->middleware('auth');
+
 
 
 
