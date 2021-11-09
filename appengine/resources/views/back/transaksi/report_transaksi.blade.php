@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:background-color="http://www.w3.org/1999/xhtml">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Laporan Transaksi</title>
+    <title>Laporan Transaksi Penjualan</title>
     {{--<script>
         (function() {
             // fungsi untuk menampilkan gambar berupa svg
@@ -131,7 +131,7 @@
     <div class="row mt-6">
         <div class="col-md-12">
             <div class="text-center">
-                <h2>Daftar Transaksi</h2>
+                <h2>Daftar Transaksi Penjualan</h2>
                 <table class="table table-bordered">
                     <thead class="thead-dark">
                         <tr>

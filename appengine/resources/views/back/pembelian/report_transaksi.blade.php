@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:background-color="http://www.w3.org/1999/xhtml">
 <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Laporan Transaksi</title>
+    <title>Laporan Transaksi Pembelian</title>
     {{--<script>
         (function() {
             // fungsi untuk menampilkan gambar berupa svg
@@ -131,16 +131,13 @@
     <div class="row mt-6">
         <div class="col-md-12">
             <div class="text-center">
-                <h2>Daftar Transaksi</h2>
+                <h2>Daftar Transaksi Pembelian</h2>
                 <table class="table table-bordered">
                     <thead class="thead-dark">
                         <tr>
                             <td>No.</td>
-                            <td>Nama Pelanggan</td>
-                            <td>Telepon</td>
-                            <td>Jumlah Bayar</td>
+                            <td>Total Harga</td>
                             <td>Tanggal</td>
-                            <td>Status Transaksi</td>
                         </tr>
                     </thead>
                     @php
@@ -154,11 +151,8 @@
                             @endphp
                             <tr>
                                 <td>{{$no++}}</td>
-                                <td align="left">{{$val->name}}</td>
-                                <td>{{$val->phone}}</td>
                                 <td>Rp. {{number_format($val->total_harga,0,',','.')}}</td>
                                 <td>{{\Carbon\Carbon::parse($val->created_at)->format('d M Y')}}</td>
-                                <td>{{$val->status_transaksi}}</td>
                             </tr>
                         @endforeach
                     </tbody>

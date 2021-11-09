@@ -163,12 +163,11 @@ class PembelianController extends Controller
     }
 
     public function cetakLaporan(Request $request){
-        $data = Transaksi::select('transaksi.*','users.name','users.alamat','users.phone')
-            ->join('users','users.id','=','transaksi.id_user')
-            ->orderBy('id_transaksi', 'DESC')
+        $data = Pembelian::select('*')
+            ->orderBy('id_pembelian', 'DESC')
             ->get();
 
-        return view('back.transaksi.report_transaksi', compact('data'));
+        return view('back.pembelian.report_transaksi', compact('data'));
     }
 
 
