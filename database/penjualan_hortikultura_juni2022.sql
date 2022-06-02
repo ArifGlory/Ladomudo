@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2021 at 04:06 PM
+-- Generation Time: Jun 02, 2022 at 06:11 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.9
 
@@ -37,6 +37,15 @@ CREATE TABLE `detail_pembelian` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detail_pembelian`
+--
+
+INSERT INTO `detail_pembelian` (`id_detail_pembelian`, `id_pembelian`, `id_produk`, `jumlah_beli`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 2, 5, '2021-11-09 07:36:07', '2021-11-09 07:36:07', NULL),
+(2, 1, 1, 10, '2021-11-09 07:36:07', '2021-11-09 07:36:07', NULL),
+(3, 2, 4, 10, '2021-11-09 07:46:16', '2021-11-09 07:46:16', NULL);
 
 -- --------------------------------------------------------
 
@@ -138,6 +147,14 @@ CREATE TABLE `pembelian` (
   `deleted_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pembelian`
+--
+
+INSERT INTO `pembelian` (`id_pembelian`, `total_harga`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 10000, '2021-11-09 07:36:07', '2021-11-09 07:50:19', '2021-11-09'),
+(2, 20000, '2021-11-09 07:46:16', '2021-11-09 07:46:16', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -151,6 +168,7 @@ CREATE TABLE `produk` (
   `nama_produk` varchar(120) DEFAULT NULL,
   `foto_produk` varchar(120) DEFAULT NULL,
   `harga` int(11) NOT NULL DEFAULT 0,
+  `harga_beli` int(11) NOT NULL DEFAULT 0,
   `stok` int(11) NOT NULL DEFAULT 0,
   `deskripsi_produk` text DEFAULT NULL,
   `cara_penyimpanan` text DEFAULT NULL,
@@ -165,11 +183,11 @@ CREATE TABLE `produk` (
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id_produk`, `id_supplier`, `id_kategori`, `nama_produk`, `foto_produk`, `harga`, `stok`, `deskripsi_produk`, `cara_penyimpanan`, `diskon`, `manfaat_produk`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 'Buncis', '1635742717548.jpg', 1000, 100, 'Buncis Segar', 'Di dalam tempat dingin', 20, NULL, '2021-10-31 14:58:37', '2021-11-08 06:23:32', NULL),
-(2, 1, 2, 'Singkong Raja', '1635753093231.jpg', 1500, 25, 'Singkong Nya besar dan kuat', 'Di tempat bersih', 5, NULL, '2021-10-31 17:51:33', '2021-11-08 06:23:24', NULL),
-(3, 1, 1, 'aa', '1635755849695.png', 222, 1111, 'aaaa', 'wwww', 0, NULL, '2021-10-31 18:37:29', '2021-10-31 18:37:41', '2021-11-01'),
-(4, 1, 1, 'Sawi', '1635948615387.jpg', 3000, 50, 'Sawi Segar Pegunungan', 'di tempat dingin', 10, 'Dapat digunakan untuk sayuran segar setiap hari', '2021-11-03 07:10:15', '2021-11-08 06:23:07', NULL);
+INSERT INTO `produk` (`id_produk`, `id_supplier`, `id_kategori`, `nama_produk`, `foto_produk`, `harga`, `harga_beli`, `stok`, `deskripsi_produk`, `cara_penyimpanan`, `diskon`, `manfaat_produk`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 1, 'Buncis', '1635742717548.jpg', 1000, 500, 100, 'Buncis Segar', 'Di dalam tempat dingin', 20, NULL, '2021-10-31 14:58:37', '2021-11-09 06:19:24', NULL),
+(2, 1, 2, 'Singkong Raja', '1635753093231.jpg', 1500, 1000, 25, 'Singkong Nya besar dan kuat', 'Di tempat bersih', 5, NULL, '2021-10-31 17:51:33', '2021-11-09 06:19:11', NULL),
+(3, 1, 1, 'aa', '1635755849695.png', 222, 0, 1111, 'aaaa', 'wwww', 0, NULL, '2021-10-31 18:37:29', '2021-10-31 18:37:41', '2021-11-01'),
+(4, 1, 1, 'Sawi', '1635948615387.jpg', 3000, 2000, 60, 'Sawi Segar Pegunungan', 'di tempat dingin', 10, 'Dapat digunakan untuk sayuran segar setiap hari', '2021-11-03 07:10:15', '2021-11-09 07:46:17', NULL);
 
 -- --------------------------------------------------------
 
@@ -297,6 +315,7 @@ CREATE TABLE `users` (
   `foto` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `phone` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `alamat` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `alamat_pengiriman` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `jenis_user` enum('user','admin') COLLATE utf8mb4_unicode_ci DEFAULT 'user',
@@ -309,10 +328,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `name`, `foto`, `phone`, `alamat`, `token`, `remember_token`, `jenis_user`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(27, 'admin@gmail.com', '$2y$10$1qZzCfm0vYLAivPeJdDZ0.oAeCROXA5YMMtTCgtb2aQn6oMV7461m', 'Admin Utama', 'admin.jpg', '+6281392339773', NULL, '5RBVUp6MRdN7Pkz8HFdI2g3dJrhVdw1K5VTUF5x4EeucUAAsgqLFysdoROHimlrvN19cM0tcHIXdpB48', '', 'admin', '2021-03-17 11:16:58', '2021-04-13 06:36:33', NULL),
-(82, 'dekker@gmail.com', '$2y$10$R5XVGECFj40JxgsEgLvUROw/Kd5/KPG8XXC88MFy87wIwvTvpd2IS', 'Douwes Dekker', '1635175914612.jpg', '081292929292', 'Kedaton, Bandar Lampung', NULL, NULL, 'user', '2021-10-25 08:31:54', '2021-10-25 08:31:54', NULL),
-(83, 'yami@gmail.com', '$2y$10$U9QlRkbAtKGzkHnTeyOsYuFigGfxrLMO1uRuX.UhJ1hJNTDIh4wPW', 'Muh Yamin', NULL, '0821121212', 'Natar , lampung Selatan', NULL, NULL, 'user', '2021-11-04 08:00:59', '2021-11-04 08:00:59', NULL);
+INSERT INTO `users` (`id`, `email`, `password`, `name`, `foto`, `phone`, `alamat`, `alamat_pengiriman`, `token`, `remember_token`, `jenis_user`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(27, 'admin@gmail.com', '$2y$10$1qZzCfm0vYLAivPeJdDZ0.oAeCROXA5YMMtTCgtb2aQn6oMV7461m', 'Admin Utama', 'admin.jpg', '+6281392339773', NULL, NULL, '5RBVUp6MRdN7Pkz8HFdI2g3dJrhVdw1K5VTUF5x4EeucUAAsgqLFysdoROHimlrvN19cM0tcHIXdpB48', '', 'admin', '2021-03-17 11:16:58', '2021-04-13 06:36:33', NULL),
+(82, 'dekker@gmail.com', '$2y$10$R5XVGECFj40JxgsEgLvUROw/Kd5/KPG8XXC88MFy87wIwvTvpd2IS', 'Douwes Dekker', '1635175914612.jpg', '081292929292', 'Kedaton, Bandar Lampung', 'Teluk betung selatan', NULL, NULL, 'user', '2021-10-25 08:31:54', '2022-06-01 21:02:17', NULL),
+(83, 'yami@gmail.com', '$2y$10$U9QlRkbAtKGzkHnTeyOsYuFigGfxrLMO1uRuX.UhJ1hJNTDIh4wPW', 'Muh Yamin', NULL, '0821121212', 'Natar , lampung Selatan', NULL, NULL, NULL, 'user', '2021-11-04 08:00:59', '2021-11-04 08:00:59', NULL);
 
 --
 -- Indexes for dumped tables
@@ -399,7 +418,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `detail_pembelian`
 --
 ALTER TABLE `detail_pembelian`
-  MODIFY `id_detail_pembelian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detail_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `detail_transaksi`
@@ -429,7 +448,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pembelian`
 --
 ALTER TABLE `pembelian`
-  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pembelian` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `produk`

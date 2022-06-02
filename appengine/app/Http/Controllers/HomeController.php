@@ -131,6 +131,24 @@ class HomeController extends Controller
         return view('front.akun',compact('data'));
     }
 
+    public function editProfile(){
+        $data = User::where('id',Auth::user()->id)
+            ->first();
+
+        return view('front.editakun',compact('data'));
+    }
+
+    public function updateProfile(Request $request){
+        $requestData = $request->all();
+        unset($requestData['_token']);
+
+        $user = User::where('id',Auth::user()->id)
+            ->first();
+        $user->update($requestData);
+
+        return redirect()->route('akun-saya');
+    }
+
     public function transaksi(Request $request){
         $transaksi = Transaksi::where('id_user',Auth::user()->id)
             ->orderBy('created_at',"DESC")

@@ -29,7 +29,7 @@
                             <div class="col-12 col-sm-8 text-left text-sm-left">
                                 <h2 class="mt-4">Detail Transaksi Tanggal {{ \Carbon\Carbon::parse($transaksi->created_at)->format('d M Y | H:i') }}</h2>
                                 <h3> <strong> Total Pembayaran Rp. {{ number_format($transaksi->total_harga,0,',','.')}} </strong></h3>
-                                <h4> <span class="badge badge-primary p-2">Status Transaksi : {{$transaksi->status_transaksi}}</span>  </h4>
+                                <h1> <span class="badge badge-primary p-2">Status Transaksi : {{$transaksi->status_transaksi}}</span>  </h1>
                             </div>
                             <div class="col-12 col-sm-4 text-center text-sm-right">
                                 @if($transaksi->tanggal_kirim != null)

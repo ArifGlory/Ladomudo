@@ -35,6 +35,10 @@
                                 <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
                                     <div class="row">
                                         @foreach($produk as $val)
+                                            @php
+                                                $potongan = ($val->diskon/100) * $val->harga;
+                                                $harga_setelah_diskon = $val->harga - $potongan;
+                                            @endphp
                                             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                                 <a href="{{url('shop/shop-detail/'.$val->id_produk)}}">
                                                     <div class="products-single fix">
@@ -60,7 +64,8 @@
                                                     </div>
                                                     <div class="why-text">
                                                         <h4> {{$val->nama_produk}}</h4>
-                                                        <h5> Rp. {{number_format($val->harga,0,',','.')}} /Kg</h5>
+                                                        <h6> <del> Rp. {{number_format($val->harga,0,',','.')}} /Kg </del> </h6>
+                                                        <h5>  Rp. {{number_format($harga_setelah_diskon,0,',','.')}} /Kg  </h5>
                                                     </div>
 
                                             </div>

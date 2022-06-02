@@ -47,7 +47,7 @@
                                                         <h5>Total Pembayaran  Rp. {{ number_format($val->total_harga,0,',','.')}}</h5>
                                                         <br>
                                                         <br>
-                                                        <p> <span class="badge badge-primary p-2">Status Transaksi : {{$val->status_transaksi}}</span>  </p>
+                                                        <h1> <span class="badge badge-primary p-2">Status Transaksi : {{$val->status_transaksi}}</span>  </h1>
                                                         <a class="btn hvr-hover" href="{{route('detail-transaksi',$val->id_transaksi)}}">Lihat</a>
                                                     </div>
                                                 </div>

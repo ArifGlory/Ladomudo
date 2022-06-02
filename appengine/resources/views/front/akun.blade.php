@@ -29,6 +29,7 @@
                                 <h3 class="mt-4">Akun Saya</h3>
                             </div>
                             <div class="col-12 col-sm-4 text-center text-sm-right">
+                                <a href="{{route('edit-akun')}}" class="btn btn-sm btn-success text-white mt-2">Ubah profil</a>
                             </div>
                         </div>
 
@@ -53,6 +54,10 @@
                                                <div class="form-group">
                                                    <h3>Alamat</h3>
                                                    <h5>{{$data->alamat}}</h5>
+                                               </div>
+                                               <div class="form-group">
+                                                   <h3>Alamat Pengiriman</h3>
+                                                   <h5>{{$data->alamat_pengiriman}}</h5>
                                                </div>
                                            </div>
                                         </div>

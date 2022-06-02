@@ -23,6 +23,8 @@ Route::get('/shop', 'HomeController@produk')->name('shop');
 Route::get('/tentang', 'HomeController@tentangKami')->name('tentang');
 Route::get('/shop/shop-detail/{id}', 'HomeController@produkDetail')->name('shop-detail');
 Route::get('/akun-saya', 'HomeController@userAccount')->middleware('auth')->name('akun-saya');
+Route::get('/edit-akun', 'HomeController@editProfile')->middleware('auth')->name('edit-akun');
+Route::post('/edit-akun', 'HomeController@updateProfile')->middleware('auth')->name('update-akun');
 Route::get('/add-ulasan/{id_produk}', 'HomeController@addUlasan')->middleware('auth')->name('add-ulasan');
 Route::post('/store-ulasan', 'HomeController@storeUlasan')->middleware('auth')->name('ulasan.store');
 Route::get('/transaksi-saya', 'HomeController@transaksi')->middleware('auth')->name('transaksi-saya');
