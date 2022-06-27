@@ -59,6 +59,10 @@
                                     <label class="form-label">Telepon</label>
                                     <h5>{{$data->phone}}</h5>
                                 </div>
+                                <div class="form-group mt-3">
+                                    <label class="form-label">Ongkir Kirim</label>
+                                    <h5>Rp. {{ number_format($data->ongkos_kirim,0,',','.')}}</h5>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mt-3">

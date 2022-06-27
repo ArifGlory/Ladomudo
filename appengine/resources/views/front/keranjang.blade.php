@@ -118,11 +118,33 @@
                         </div>
                         <hr> </div>
                 </div>
-                @if(count($keranjang) > 0)
-                    <div class="col-12 d-flex shopping-box"><a href="{{route('keranjang.checkout')}}" class="ml-auto btn hvr-hover">Checkout</a> </div>
-                @else
-                    <div class="col-12 d-flex shopping-box"><a href="#" class="ml-auto btn hvr-hover disabled">Keranjang kosong</a> </div>
-                @endif
+                <div class="row">
+                    <div class="col-md-12">
+                        <form method="post" action="{{route('keranjang.checkout')}}" >
+                            @csrf
+                            <div class="form-group">
+                                <h5>Anda harus memilih lokasi pengiriman dahulu, sebelum melakukan checkout</h5>
+                            </div>
+                            <div class="form-group">
+                                <label>Lokasi Pengiriman</label>
+                                <select class="form-control" name="ongkir" required>
+                                    @foreach($ongkir as $val)
+                                        <option value="{{$val->ongkir}}"> {{$val->nama_kota}} , Rp. {{number_format($val->ongkir,0,',','.')}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                @if(count($keranjang) > 0)
+                                    <div class="pull-left text-white">
+                                        <button type="submit" class="ml-auto btn btn-primary">Checkout</button>
+                                    </div>
+                                @else
+                                    <div class="col-12 d-flex shopping-box"><a href="#" class="ml-auto btn hvr-hover disabled">Keranjang kosong</a> </div>
+                                @endif
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
 
         </div>

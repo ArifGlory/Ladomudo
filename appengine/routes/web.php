@@ -94,7 +94,7 @@ Route::group([
     'prefix' => 'keranjang',
     'middleware' => 'auth'
 ], function () {
-    Route::get('checkout', [\App\Http\Controllers\KeranjangController::class, 'checkout'])->name('keranjang.checkout');
+    Route::post('checkout', [\App\Http\Controllers\KeranjangController::class, 'checkout'])->name('keranjang.checkout');
     Route::get('data', [\App\Http\Controllers\KeranjangController::class, 'data'])->name('keranjang.data');
     Route::get('trash', [\App\Http\Controllers\KeranjangController::class, 'trash'])->name('keranjang.trash');
     Route::get('hapus/{id}', [\App\Http\Controllers\KeranjangController::class, 'hapus'])->name('keranjang.hapus');

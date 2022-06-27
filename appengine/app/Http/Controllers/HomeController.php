@@ -15,6 +15,7 @@ use App\Models\JadwalAktivitas;
 use App\Models\JenisSk;
 use App\Models\Kategori;
 use App\Models\Kelas;
+use App\Models\Ongkir;
 use App\Models\OrangTua;
 use App\Models\Page;
 use App\Models\Post;
@@ -239,6 +240,7 @@ class HomeController extends Controller
             ->join('users','users.id','=','ulasan_rating.id_user')
             ->where('ulasan_rating.id_produk',$id)
             ->get();
+
 
         $rating = 0;
         foreach ($ulasan as $val){

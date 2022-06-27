@@ -10,6 +10,7 @@ use App\Imports\SantriDataImport;
 use App\Models\DetailTransaksi;
 use App\Models\Kategori;
 use App\Models\Keranjang;
+use App\Models\Ongkir;
 use App\Models\Transaksi;
 use App\User;
 use Illuminate\Http\Request;
@@ -37,8 +38,9 @@ class KeranjangController extends Controller
             ->join('produk','keranjang.id_produk','=','produk.id_produk')
             ->where('keranjang.id_user',Auth::user()->id)
             ->get();
+        $ongkir = Ongkir::all();
 
-        return view('front.keranjang',compact('keranjang'));
+        return view('front.keranjang',compact('keranjang','ongkir'));
     }
 
     /*
@@ -96,7 +98,7 @@ class KeranjangController extends Controller
             ->join('produk','keranjang.id_produk','=','produk.id_produk')
             ->where('keranjang.id_user',Auth::user()->id)
             ->get();
-
+        $ongkir = $request->input('ongkir');
 
 
         if (count($keranjang) > 0){
@@ -111,7 +113,8 @@ class KeranjangController extends Controller
 
             $save_trans = Transaksi::create([
                 'id_user' => Auth::user()->id,
-                'total_harga' => $total_semua
+                'total_harga' => $total_semua,
+                'ongkos_kirim' => $ongkir,
             ]);
             if ($save_trans){
                 $id_transaksi = $save_trans->id_transaksi;

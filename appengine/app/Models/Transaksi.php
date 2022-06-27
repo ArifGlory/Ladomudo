@@ -22,6 +22,7 @@ class Transaksi extends Model
         'bukti_bayar',
         'status_transaksi',
         'tanggal_kirim',
+        'ongkos_kirim',
         'created_at',
         'updated_at'
     ];
