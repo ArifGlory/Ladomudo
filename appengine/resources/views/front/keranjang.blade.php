@@ -114,7 +114,9 @@
                         <hr>
                         <div class="d-flex gr-total">
                             <h5>Total Semua</h5>
-                            <div class="ml-auto h5"> Rp. {{number_format($total_semua,0,',','.')}} </div>
+                            <div class="ml-auto h5">
+                                <h2 id="text-total">Rp. {{number_format($total_semua,0,',','.')}} </h2>
+                            </div>
                         </div>
                         <hr> </div>
                 </div>
@@ -127,7 +129,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Lokasi Pengiriman</label>
-                                <select class="form-control" name="ongkir" required>
+                                <select class="form-control" id="select-ongkir" name="ongkir" required>
                                     @foreach($ongkir as $val)
                                         <option value="{{$val->ongkir}}"> {{$val->nama_kota}} , Rp. {{number_format($val->ongkir,0,',','.')}} </option>
                                     @endforeach
@@ -151,3 +153,26 @@
     </div>
     <!-- End Cart -->
 @endsection
+@push('scripts')
+    <script>
+        const rupiah = (number)=>{
+            return new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR"
+            }).format(number);
+        }
+
+        var total_semua = '{{$total_semua}}';
+        total_semua = parseInt(total_semua);
+        var jumlah_total = 0;
+        console.log("total semua = "+total_semua);
+
+        $('#select-ongkir').on("change",function () {
+            var ongkir = $(this).val();
+            ongkir = parseInt(ongkir);
+            jumlah_total = total_semua + ongkir;
+            $('#text-total').text(rupiah(jumlah_total));
+        });
+
+    </script>
+@endpush

@@ -113,7 +113,7 @@ class KeranjangController extends Controller
 
             $save_trans = Transaksi::create([
                 'id_user' => Auth::user()->id,
-                'total_harga' => $total_semua,
+                'total_harga' => $total_semua + $ongkir,
                 'ongkos_kirim' => $ongkir,
             ]);
             if ($save_trans){
